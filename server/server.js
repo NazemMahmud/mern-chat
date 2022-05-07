@@ -6,14 +6,10 @@ import Router from "./src/routes/index.js";
 
 const app = express();
 
-const port = process.env.PORT || 8080
-
 // middlewares
 app.use(bodyParser.json());
 
 // api routes
 Router(app);
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
-})
+export {app}
