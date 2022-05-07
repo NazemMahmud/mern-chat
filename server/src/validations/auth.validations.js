@@ -8,7 +8,7 @@ const loginSchema = Joi.object().keys({
 
 const loginValidate = data => {
     console.log('data: ', data);
-    const result = loginSchema.validate(data);
+    const result = loginSchema.validate(data, {abortEarly: false});
     result.value = data;
     return result;
 }
