@@ -42,7 +42,7 @@ describe('Login test', () => {
         ];
         const res = await request(app).post('/api/auth/login')
             .send()
-        expect(res.statusCode).toEqual(500);
+        expect(res.statusCode).toEqual(422);
         expect(res.body).toHaveProperty('data');
         expect(res.body).toHaveProperty('message');
         expect(res.body).toHaveProperty('status');
@@ -64,7 +64,7 @@ describe('Login test', () => {
                 email: "",
                 password: ""
             })
-        expect(res.statusCode).toEqual(500);
+        expect(res.statusCode).toEqual(422);
         expect(res.body).toEqual({
             "data": null,
             "message": errorMessages,
@@ -83,8 +83,85 @@ describe('Login test', () => {
                 "email": "testuser1",
                 "password": "12"
             })
-        expect(res.statusCode).toEqual(500);
+        expect(res.statusCode).toEqual(422);
         expect(res.body).toEqual({
+            "data": null,
+            "message": errorMessages,
+            "status": "failed"
+        })
+    })
+})
+
+describe('Registration test', () => {
+    // Test 1: perfect registration
+    it("Should register a user", async () => {
+        const result = await request(app).post('/api/auth/signup')
+            .send({
+                name: 'test user 12',
+                email: "testuser12@gmail.com",
+                password: "123456"
+            })
+        expect(result.statusCode).toEqual(201);
+        expect(result.body).toHaveProperty('message');
+        expect(result.body).toHaveProperty('status');
+        expect(result.body.status).toEqual('success');
+    })
+
+    // Test 2: required fields missing (multi error)
+    it("Error: required fields missing, success", async () => {
+        const errorMessages = [
+            "name is required",
+            "email is required",
+            "password is required"
+        ];
+        const result = await request(app).post('/api/auth/signup')
+            .send()
+        expect(result.statusCode).toEqual(422);
+        expect(result.body).toHaveProperty('data');
+        expect(result.body).toHaveProperty('message');
+        expect(result.body).toHaveProperty('status');
+        expect(result.body).toEqual({
+            "data": null,
+            "message": errorMessages,
+            "status": "failed"
+        })
+    })
+
+    // Test 3: required fields empty
+    it("Error: required fields empty", async () => {
+        const errorMessages = [
+            "name is not allowed to be empty",
+            "email is not allowed to be empty",
+            "password is not allowed to be empty"
+        ];
+        const result = await request(app).post('/api/auth/signup')
+            .send({
+                name: "",
+                email: "",
+                password: ""
+            })
+        expect(result.statusCode).toEqual(422);
+        expect(result.body).toEqual({
+            "data": null,
+            "message": errorMessages,
+            "status": "failed"
+        })
+    })
+
+    // Test 4: email pattern mismatch, password length
+    it("Error: email pattern mismatch, password length", async () => {
+        const errorMessages = [
+            "email must be a valid email",
+            "password length must be at least 3 characters long"
+        ];
+        const result = await request(app).post('/api/auth/signup')
+            .send({
+                name: "testuser12",
+                email: "testuser12",
+                password: "12"
+            })
+        expect(result.statusCode).toEqual(422);
+        expect(result.body).toEqual({
             "data": null,
             "message": errorMessages,
             "status": "failed"

@@ -47,7 +47,7 @@ export class DuplicateKeyError extends CommonErrors {
 export class ValidationErrors extends CommonErrors {
     constructor(message) {
         super(message);
-        this.name = 'BadRequest';
+        this.name = 'NotValidated';
     }
     getStatusCode() { return 422; }
 }

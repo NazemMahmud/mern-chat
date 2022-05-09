@@ -1,5 +1,5 @@
 export const errorResponse = (res, err) => {
-    return res.status(500)
+    return res.status(err.getStatusCode() || 400)
         .json({
             data: null,
             message: err.message || 'Something went wrong',

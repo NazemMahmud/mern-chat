@@ -9,7 +9,13 @@ const getOne = async condition => {
     return UserModel.findOne(condition);
 }
 
+const createNew = async data => {
+    const model = new UserModel(data);
+    return model.save();
+}
+
 export const User = {
     model: UserModel,
-    getOne: getOne,
+    getOne,
+    createNew
 }

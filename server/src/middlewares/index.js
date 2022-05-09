@@ -38,12 +38,9 @@ export const handleValidation = validate => {
         message.forEach(msg => {
             messages.push(msg.replace(/["]+/g, '')) // trim quote marks
         })
-        console.log('messages array: ', messages);
+        // console.log('messages array: ', messages);
         const error = new ValidationErrors(messages);
         return errorResponse(res, error)
-        // return {
-        //     message: 'Errror ...........................'
-        // }
         // Validate error sample
         /**
           [Error [ValidationError]: "email" must be a valid email] {
