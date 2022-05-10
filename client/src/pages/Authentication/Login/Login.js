@@ -1,33 +1,15 @@
-import React, {useReducer} from 'react';
-import AuthLayout from "../../layout/AuthLayout";
+import React, {useEffect, useReducer, useState} from 'react';
+import AuthLayout from "../../../layout/AuthLayout";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import {Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Typography } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
+import {loginStyles} from "./LoginStyles";
 
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        margin: '25px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: "10px",
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-    },
-    loginSubmit: {
-        marginTop: "2vh !important",
-        float: "right"
-    },
-}));
 
 const Login = () => {
-    const classes = useStyles();
+    const classes = loginStyles();
+    const [isDisabled, setIsDisabled] = useState(true);
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
@@ -35,12 +17,15 @@ const Login = () => {
                 name: "email",
                 value: "",
                 pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                isValid: true,
-                helperText: ""
+                isValid: false,
+                helperText: "",
+                touched: false
             },
             password: {
                 name: "password",
                 value: "",
+                isValid: false,
+                touched: false
             }
         }
     );
@@ -48,23 +33,37 @@ const Login = () => {
     const inputKeys = Object.keys(formInput);
 
     /** ******************* form based action *******************************/
+
+    useEffect(() => {
+        let disable = false
+        console.log(formInput);
+        for(const elem in formInput) {
+            console.log(formInput[elem]);
+            disable = !formInput[elem].isValid;
+            if (disable) {
+                break;
+            }
+        }
+        console.log('disable: ', disable);
+        setIsDisabled(disable);
+    }, [formInput]);
+
     const formValidation = (input, inputIdentifier) => {
         if(inputIdentifier === "email") {
             input.isValid = !!(formInput.email.value.match(formInput.email.pattern));
-            input.helperText = (!input.isValid) ? "Invalid email address": "";
+            input.helperText = (!input.isValid) ? "Invalid email address" : "";
+        }
+        if(inputIdentifier === "password") {
+            input.isValid = !!input.value.length;
         }
 
-        if(!input.value.length){
-            input.isValid = true;
-            input.helperText = "";
-        }
         setFormInput({...formInput, [inputIdentifier]: input});
     };
 
     const handleInput = (event, inputIdentifier) => {
         const input = formInput[inputIdentifier];
         input.value = event.target.value;
-        // setFormInput({...formInput, [inputIdentifier]: input});
+        input.touched = true
         formValidation(input, inputIdentifier);
     };
 
@@ -90,7 +89,7 @@ const Login = () => {
                                 <TextField className={classes.form} variant="outlined" margin="normal" required
                                            defaultValue={formInput.email.value} name={formInput.email.name}
                                            id="email" label="Email Address"  autoComplete="email" autoFocus
-                                           error={!formInput.email.isValid} helperText={formInput.email.helperText}
+                                           error={!formInput.email.isValid && formInput.email.touched} helperText={formInput.email.helperText}
                                            onChange={event => handleInput(event, inputKeys[0])}
 
                                 />
@@ -100,27 +99,27 @@ const Login = () => {
                                            onChange={event => handleInput(event, inputKeys[1])}
                                 />
                                 <Grid container>
-                                    <Grid item xs={6} style={{width: "50%"}}>
-                                        <FormControlLabel style={{paddingTop: "20px", marginLeft: "-10px", float: "left", width: "100%"}}
+                                    <Grid item xs={6} className={classes.rememberMeWrapper}>
+                                        <FormControlLabel className={classes.rememberMe}
                                                           control={<Checkbox value="remember" color="primary" />}
                                                           label="Remember me"/>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <Button className={classes.loginSubmit}
+                                        <Button className={classes.loginSubmit} disabled={isDisabled}
                                                 type="submit"  variant="contained" color="primary">
                                             Sign In
                                         </Button>
                                     </Grid>
                                 </Grid>
 
-                                <Grid container style={{marginBottom: '15px', marginTop: '15px'}}>
+                                <Grid container className={classes.redirect}>
                                     <Grid item xs={6}>
-                                        <Link href="#" variant="body2" style={{textAlign: "left", display: "block", textDecoration: 'none'}}>
+                                        <Link href="#" variant="body2" className={classes.forgetPassword}>
                                             Forgot password?
                                         </Link>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <Link href="/signup" variant="body2" style={{textDecoration: 'none', textAlign: "right", display: "block"}}>
+                                        <Link href="/signup" variant="body2" className={classes.signUp}>
                                             {"Don't have an account? Sign Up"}
                                         </Link>
                                     </Grid>
