@@ -1,14 +1,19 @@
-import React, {Fragment} from "react";
+import React from "react";
 import './App.css';
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import Login from "./pages/Authentication/Login/Login";
+import Registration from "./pages/Authentication/Registration";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+     <BrowserRouter>
+         <Routes>
+             <Route path="/login" element={<Login />}></Route>
+             <Route path="/register" element={< Registration />}></Route>
+             <Route path="*" element={<Navigate to="/login" />} />
+         </Routes>
+     </BrowserRouter>
     </div>
   );
 }
