@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import Box from '@mui/material/Box';
+import AuthLayout from "../../layout/AuthLayout";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
@@ -8,9 +8,6 @@ import LockIcon from '@mui/icons-material/Lock';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        minHeight: '75vh'
-    },
     paper: {
         margin: '25px',
         display: 'flex',
@@ -24,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%', // Fix IE 11 issue.
     },
     loginSubmit: {
-        // margin: theme.spacing(3, 0, 2),
         marginTop: "2vh !important",
         float: "right"
     },
@@ -51,23 +47,29 @@ const Login = () => {
 
     const inputKeys = Object.keys(formInput);
 
+    /** ******************* form based action *******************************/
+    const formValidation = (input, inputIdentifier) => {
+        if(inputIdentifier === "email") {
+            input.isValid = !!(formInput.email.value.match(formInput.email.pattern));
+            input.helperText = (!input.isValid) ? "Invalid email address": "";
+        }
+
+        if(!input.value.length){
+            input.isValid = true;
+            input.helperText = "";
+        }
+        setFormInput({...formInput, [inputIdentifier]: input});
+    };
+
     const handleInput = (event, inputIdentifier) => {
         const input = formInput[inputIdentifier];
         input.value = event.target.value;
-        setFormInput({...formInput, [inputIdentifier]: input});
-        // formValidation(input, inputIdentifier);
+        // setFormInput({...formInput, [inputIdentifier]: input});
+        formValidation(input, inputIdentifier);
     };
 
     return (
-        <Box sx={{
-            flexGrow: 1,
-            width: "100%",
-            height: "100vh",
-            background: "#dddbd1",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-        }}>
+        <AuthLayout>
             <Grid container spacing={2}
                   direction="column"
                   alignItems="center"
@@ -128,7 +130,7 @@ const Login = () => {
                     </Paper>
                 </Grid>
             </Grid>
-        </Box>
+        </AuthLayout>
     );
 }
 
