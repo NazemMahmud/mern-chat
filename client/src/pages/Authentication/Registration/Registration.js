@@ -1,9 +1,9 @@
-import React, {useReducer, useEffect, useRef, useState} from "react";
+import React, {useReducer, useEffect, useState} from "react";
 import {Avatar, Button, TextField, Paper, Link, Grid, Typography, Slide, Alert, Snackbar} from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import AuthLayout from "../../../layout/AuthLayout";
 import {registrationStyles} from "./RegistrationStyles";
-import {checkDisableButton} from "../../../utility/utils";
+import {checkDisableButton, getAccessToken} from "../../../utility/utils";
 import {registration} from "../../../services/Authentication/auth.service";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,13 @@ const Registration = () => {
     const navigate = useNavigate();
     const classes = registrationStyles(); // styling
     const [isDisabled, setIsDisabled] = useState(true);
+
+    // redirect if logged in
+    useEffect(() => {
+        if (getAccessToken) {
+            navigate("/");
+        }
+    }, []);
 
     /** ****************** snackbar UI and actions *******************************/
     const SlideTransition = props => {

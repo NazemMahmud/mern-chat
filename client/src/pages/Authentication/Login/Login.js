@@ -20,7 +20,7 @@ import {login} from "../../../services/Authentication/auth.service";
 import {useDispatch} from "react-redux";
 import {handleLogin} from "../../../redux/authentication";
 import {useNavigate} from "react-router-dom";
-import {checkDisableButton} from "../../../utility/utils";
+import {checkDisableButton, getAccessToken} from "../../../utility/utils";
 
 const Login = () => {
     const classes = loginStyles();
@@ -49,6 +49,13 @@ const Login = () => {
     );
 
     const inputKeys = Object.keys(formInput);
+
+    // redirect if logged in
+    useEffect(() => {
+        if (getAccessToken) {
+            navigate("/");
+        }
+    }, []);
 
     /** ******************* snackbar UI and actions *******************************/
     const SlideTransition = props => {
