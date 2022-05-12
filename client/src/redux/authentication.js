@@ -17,9 +17,19 @@ export const authSlice = createSlice({
       localStorage.setItem('accessToken', action.payload.accessToken)
       // localStorage.setItem('refreshToken, JSON.stringify(action.payload.refreshToken))
     },
+    handleLogout: state => {
+      state.userData = {}
+      state.accessToken = null
+      // state.refreshToken = null
+      // ** Remove user, accessToken & refreshToken from localStorage
+      localStorage.removeItem('userData')
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('user')
+      // localStorage.removeItem('refreshToken')
+    }
   }
 })
 
-export const { handleLogin } = authSlice.actions
+export const { handleLogin, handleLogout } = authSlice.actions
 
 export default authSlice.reducer;

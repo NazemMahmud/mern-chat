@@ -1,4 +1,4 @@
-import {instance as axios} from "../../config/axios";
+import {guestInstance as axios, authInstance as authAxios} from "../../utility/axios";
 
 export const login = async data => {
     // REMINDER: no need to receive id, it will be in token
@@ -8,4 +8,8 @@ export const login = async data => {
 
 export const registration = data => {
     return axios.post('/auth/signup', data);
+}
+
+export const logout = async () => {
+    return authAxios.post('/auth/logout');
 }
