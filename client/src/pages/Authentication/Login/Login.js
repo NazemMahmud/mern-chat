@@ -28,7 +28,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [isDisabled, setIsDisabled] = useState(true);
-    // const [snackOpen, setSnackOpen] = useState(false);
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({...state, ...newState}),
         {
@@ -50,9 +49,10 @@ const Login = () => {
     );
 
     const inputKeys = Object.keys(formInput);
-    // snackbar UI and actions
+
+    /** ******************* snackbar UI and actions *******************************/
     const SlideTransition = props => {
-        return <Slide {...props} direction="right"/>;
+        return <Slide {...props} direction="right" />;
     }
 
     const [snackData, setSnackData] = useState({

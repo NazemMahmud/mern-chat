@@ -1,15 +1,40 @@
 import React, {useReducer, useEffect, useRef, useState} from "react";
-import {Avatar, Button, TextField, Paper, Link, Grid, Typography } from '@mui/material';
+import {Avatar, Button, TextField, Paper, Link, Grid, Typography, Slide, Alert, Snackbar} from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import AuthLayout from "../../../layout/AuthLayout";
 import {registrationStyles} from "./RegistrationStyles";
 import {checkDisableButton} from "../../../utility/utils";
+import {registration} from "../../../services/Authentication/auth.service";
+import { useNavigate } from "react-router-dom";
 
 
 const Registration = () => {
+    const navigate = useNavigate();
     const classes = registrationStyles(); // styling
     const [isDisabled, setIsDisabled] = useState(true);
 
+    /** ****************** snackbar UI and actions *******************************/
+    const SlideTransition = props => {
+        return <Slide {...props} direction="right"/>;
+    }
+
+    const [snackData, setSnackData] = useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'right',
+        message: '',
+        Transition: SlideTransition,
+        type: ''
+    });
+    const {vertical, horizontal, open, message, type} = snackData;
+    const snackClose = () => {
+        setSnackData({
+            ...snackData,
+            open: false
+        })
+    }
+
+    /** ******************* form based action *******************************/
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
@@ -44,7 +69,6 @@ const Registration = () => {
     );
     const inputKeys = Object.keys(formInput);
 
-    /** ******************* form based action *******************************/
     // to enable/disable submit button
     useEffect(() => {
         setIsDisabled(checkDisableButton(formInput))
@@ -76,34 +100,57 @@ const Registration = () => {
         setFormInput({...formInput, [inputIdentifier]: input});
     };
 
-
     // register form: on change of an input field action
     const handleInput = (event, inputIdentifier) => {
         const input = formInput[inputIdentifier];
         input.value = event.target.value;
         input.touched = true
-        // setFormInput({...formInput, [inputIdentifier]: input});
         formValidation(input, inputIdentifier);
     };
 
+    // format data before submit
+    const formatSubmitData = () => {
+        const data = {};
+        for (let loginData in formInput) {
+            data[loginData] = formInput[loginData].value;
+        }
+
+        delete data['confirmPassword'];
+        return data;
+    }
 
     // sign up action
-    const signUp = async (event) => {
-    //     event.preventDefault();
-    //     const formData = {};
-    //     for (let registerData in formInput) {
-    //         formData[registerData] = formInput[registerData].value;
-    //         // TODO: if required field empty, show helpertext and error valid
-    //     }
-    //     delete formData['confirmPassword'];
-    //     delete formData['rememberMe'];
-    //
-    //     await signUpAction(formData);
+    const signUp = async event => {
+        event.preventDefault();
+        const formData = formatSubmitData();
+
+        await registration(formData)
+            .then(response => {
+                navigate("/login");
+            })
+            .catch(error => {
+                // TODO: add a toaster
+                console.log('error..', error)
+                setSnackData({
+                    ...snackData,
+                    open: true,
+                    type: 'error',
+                    message: error.response.data.message
+                })
+            });
+        // TODO: add a loader
     };
 
 
     return (
         <AuthLayout>
+            <Snackbar
+                anchorOrigin={{vertical, horizontal}}
+                open={open}
+                onClose={snackClose}
+                key={vertical + horizontal}>
+                <Alert severity={type}> {message}</Alert>
+            </Snackbar>
             <Grid container spacing={0}
                   direction="column"
                   alignItems="center"
