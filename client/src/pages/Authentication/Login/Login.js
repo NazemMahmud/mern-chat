@@ -30,7 +30,7 @@ const Login = () => {
     const [isDisabled, setIsDisabled] = useState(true);
     // const [snackOpen, setSnackOpen] = useState(false);
     const [formInput, setFormInput] = useReducer(
-        (state, newState) => ({ ...state, ...newState }),
+        (state, newState) => ({...state, ...newState}),
         {
             email: {
                 name: "email",
@@ -52,7 +52,7 @@ const Login = () => {
     const inputKeys = Object.keys(formInput);
     // snackbar UI and actions
     const SlideTransition = props => {
-        return <Slide {...props} direction="right" />;
+        return <Slide {...props} direction="right"/>;
     }
 
     const [snackData, setSnackData] = useState({
@@ -63,7 +63,7 @@ const Login = () => {
         Transition: SlideTransition,
         type: ''
     });
-    const { vertical, horizontal, open, message, type } = snackData;
+    const {vertical, horizontal, open, message, type} = snackData;
     const snackClose = () => {
         setSnackData({
             ...snackData,
@@ -78,11 +78,11 @@ const Login = () => {
     }, [formInput])
 
     const formValidation = (input, inputIdentifier) => {
-        if(inputIdentifier === "email") {
+        if (inputIdentifier === "email") {
             input.isValid = !!(formInput.email.value.match(formInput.email.pattern));
             input.helperText = (!input.isValid) ? "Invalid email address" : "";
         }
-        if(inputIdentifier === "password") {
+        if (inputIdentifier === "password") {
             input.isValid = !!input.value.length;
         }
 
@@ -130,7 +130,7 @@ const Login = () => {
     return (
         <AuthLayout>
             <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
+                anchorOrigin={{vertical, horizontal}}
                 open={open}
                 onClose={snackClose}
                 key={vertical + horizontal}>
@@ -143,54 +143,54 @@ const Login = () => {
                   className={classes.root}>
                 <Grid item xs={12} sm={12} md={12}>
                     <Paper elevation={6} square p={2}>
-                        <div  className={classes.paper}>
+                        <div className={classes.paper}>
                             <Avatar className={classes.avatar}>
-                                <LockIcon />
+                                <LockIcon/>
                             </Avatar>
                             <Typography component="h1" variant="h5">
                                 Sign In
                             </Typography>
-                            {/*<form noValidate >*/}
-                                <TextField className={classes.form} variant="outlined" margin="normal" required
-                                           defaultValue={formInput.email.value} name={formInput.email.name}
-                                           id="email" label="Email Address"  autoComplete="email" autoFocus
-                                           error={!formInput.email.isValid && formInput.email.touched} helperText={formInput.email.helperText}
-                                           onChange={event => handleInput(event, inputKeys[0])}
+                            <TextField className={classes.form} variant="outlined" margin="normal" required
+                                       defaultValue={formInput.email.value} name={formInput.email.name}
+                                       id="email" label="Email Address" autoComplete="email" autoFocus
+                                       error={!formInput.email.isValid && formInput.email.touched}
+                                       helperText={formInput.email.helperText}
+                                       onChange={event => handleInput(event, inputKeys[0])}
 
-                                />
-                                <TextField className={classes.form} variant="outlined" margin="normal" required
-                                           name={formInput.password.name} defaultValue={formInput.password.value}
-                                           label="Password" type="password" id="password" autoComplete="current-password"
-                                           onChange={event => handleInput(event, inputKeys[1])}
-                                />
-                                <Grid container>
-                                    <Grid item xs={6} className={classes.rememberMeWrapper}>
-                                        <FormControlLabel className={classes.rememberMe}
-                                                          control={<Checkbox value="remember" color="primary" />}
-                                                          label="Remember me"/>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Button className={classes.loginSubmit}
-                                                disabled={isDisabled}
-                                                onClick={signIn}  variant="contained" color="primary">
-                                            Sign In
-                                        </Button>
-                                    </Grid>
-                                </Grid>
+                            />
+                            <TextField className={classes.form} variant="outlined" margin="normal" required
+                                       name={formInput.password.name} defaultValue={formInput.password.value}
+                                       label="Password" type="password" id="password" autoComplete="current-password"
+                                       onChange={event => handleInput(event, inputKeys[1])}
+                            />
 
-                                <Grid container className={classes.redirect}>
-                                    <Grid item xs={6}>
-                                        <Link href="#" variant="body2" className={classes.forgetPassword}>
-                                            Forgot password?
-                                        </Link>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Link href="/signup" variant="body2" className={classes.signUp}>
-                                            {"Don't have an account? Sign Up"}
-                                        </Link>
-                                    </Grid>
+                            <Grid container>
+                                <Grid item xs={6} className={classes.rememberMeWrapper}>
+                                    <FormControlLabel className={classes.rememberMe}
+                                                      control={<Checkbox value="remember" color="primary"/>}
+                                                      label="Remember me"/>
                                 </Grid>
-                            {/*</form>*/}
+                                <Grid item xs={6}>
+                                    <Button className={classes.loginSubmit}
+                                            disabled={isDisabled}
+                                            onClick={signIn} variant="contained" color="primary">
+                                        Sign In
+                                    </Button>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className={classes.redirect}>
+                                <Grid item xs={6}>
+                                    <Link href="#" variant="body2" className={classes.forgetPassword}>
+                                        Forgot password?
+                                    </Link>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Link href="/register" variant="body2" className={classes.signUp}>
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </div>
                     </Paper>
                 </Grid>

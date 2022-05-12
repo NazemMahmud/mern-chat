@@ -1,9 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
 const registrationStyles = makeStyles(() => ({
-    root: {
-        minHeight: '75vh'
-    },
     paper: {
         margin: '25px',
         display: 'flex',
@@ -19,6 +16,7 @@ const registrationStyles = makeStyles(() => ({
     },
     formInput: {
         width: '100%', // Fix IE 11 issue.
+        minHeight: '8.5vh'
     },
     redirect: {
         width: "50%", marginTop: '3vh !important'

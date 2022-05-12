@@ -15,6 +15,7 @@ const loginStyles = makeStyles(() => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
+        minHeight: '8.5vh'
     },
     loginSubmit: {
         marginTop: "2vh !important",
