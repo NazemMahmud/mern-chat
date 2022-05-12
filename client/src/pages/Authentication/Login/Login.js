@@ -73,7 +73,8 @@ const Login = () => {
                   direction="column"
                   alignItems="center"
                   width="30rem"
-                  justifyContent="space-evenly">
+                  justifyContent="space-evenly"
+                  className={classes.root}>
                 <Grid item xs={8} sm={8} md={4}>
                     <Paper elevation={6} square p={2}>
                         <div  className={classes.paper}>

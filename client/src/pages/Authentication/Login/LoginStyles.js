@@ -1,6 +1,9 @@
 import { makeStyles } from '@mui/styles';
 
-const loginStyles = makeStyles((theme) => ({
+const loginStyles = makeStyles(() => ({
+    root: {
+        minHeight: '75vh'
+    },
     paper: {
         margin: '25px',
         display: 'flex',
@@ -31,10 +34,10 @@ const loginStyles = makeStyles((theme) => ({
         marginTop: '15px'
     },
     forgetPassword: {
-        textAlign: "left", display: "block", textDecoration: 'none'
+        textAlign: "left", display: "block", textDecoration: 'none !important'
     },
     signUp: {
-        textDecoration: 'none', textAlign: "right", display: "block"
+        textDecoration: 'none !important', textAlign: "right", display: "block"
     }
 }));
 
