@@ -22,6 +22,7 @@ import {handleLogin} from "../../../redux/authentication";
 import {useNavigate} from "react-router-dom";
 import {checkDisableButton, getAccessToken} from "../../../utility/utils";
 
+
 const Login = () => {
     const classes = loginStyles();
     const dispatch = useDispatch()
@@ -55,7 +56,7 @@ const Login = () => {
         if (getAccessToken) {
             navigate("/");
         }
-    }, []);
+    }, [navigate]);
 
     /** ******************* snackbar UI and actions *******************************/
     const SlideTransition = props => {

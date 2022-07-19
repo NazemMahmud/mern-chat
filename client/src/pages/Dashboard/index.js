@@ -16,7 +16,7 @@ const Dashboard = () => {
         if (!getAccessToken) {
             navigate("/login");
         }
-    }, []);
+    }, [navigate]);
 
     const signOut = async event => {
         event.preventDefault()

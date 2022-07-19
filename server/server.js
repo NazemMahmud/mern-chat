@@ -11,11 +11,11 @@ app.use(bodyParser.json());
 
 // cors middleware
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"], // TODO: whitelist api, later from env file
+    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
 }
 app.use(cors(corsOptions));
 
 // api routes
 Router(app);
 
-export {app}
+export {app};
