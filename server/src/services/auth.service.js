@@ -54,5 +54,5 @@ export const createUser = async request => {
         return {message: 'Data created successfully'}
     }
 
-    throw new Error('Something went wrong')
+    throw new Error('Something went wrong');
 }
