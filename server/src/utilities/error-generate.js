@@ -30,7 +30,6 @@ export class BadRequest extends CommonErrors {
 export class UnAuthorized extends CommonErrors {
     constructor(message) {
         super(message);
-        console.log("message: ", message);
         this.name = 'UnAuthorized';
     }
     getStatusCode() { return 401; }

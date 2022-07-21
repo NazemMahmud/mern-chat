@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
-import {JWT_SECRET_KEY} from "../config/env.config.js";
+import { JWT_SECRET_KEY } from "../config/env.config.js";
 
-
+/**
+ * create new jwt token
+ */
 export const generateToken = user => {
-    // LATER payload need to update accordingly
     return jwt.sign({
             payload: {
                 id: user.id,
@@ -11,10 +12,16 @@ export const generateToken = user => {
             }
         },
         JWT_SECRET_KEY, {
-            expiresIn: 86400 // 24 hours
+            expiresIn: 86400
         });
-}
+};
 
+
+/**
+ * Verify JWT Token
+ * @param token
+ * @returns {*}
+ */
 export const verifyToken = token => {
     return jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
         if (err) {
@@ -22,4 +29,14 @@ export const verifyToken = token => {
         }
         return decoded;
     });
+};
+
+/**
+ * get token from authorization header
+ * @param req
+ * @returns {string|string}
+ */
+export const getTokenFromHeader = req => {
+    let token = req.headers.authorization;
+    return (token && token.startsWith('Bearer ')) ? token.slice(7, token.length) : '';
 };

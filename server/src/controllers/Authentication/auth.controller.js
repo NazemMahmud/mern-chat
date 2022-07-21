@@ -2,6 +2,8 @@ import {loginUser, createUser} from "../../services/auth.service.js";
 import {generateToken} from "../../helpers/jwt.helper.js";
 import {handleError} from "../../middlewares/index.js";
 import {successResponse} from "../../helpers/httpResponse.helper.js";
+import { calculateCacheTTL } from "../../utilities/cache.js";
+import { keyvCache } from "../../../server.js";
 
 /**
  * login a user
@@ -37,4 +39,23 @@ const registration = async (req, res) => {
     }
 }
 
-export const AuthController = {login, registration}
+/**
+ * logout a user
+ * * insert the current token in block list, so that next time can't use this
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+const logout = async (req, res) => {
+    try {
+        await keyvCache.set(req.token, req.token, calculateCacheTTL(req.user.exp));
+
+        successResponse(res, {
+            data: { message: 'Successfully logged out' }
+        }, 200);
+    } catch (err) {
+        handleError(err, req, res);
+    }
+}
+
+export { login, registration, logout }

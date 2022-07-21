@@ -5,7 +5,7 @@ export const errorResponse = (res, err) => {
             message: err.message || 'Something went wrong',
             status: 'failed'
         })
-}
+};
 
 export const successResponse = (res, data, code=200) => {
     res.status(code).send({
@@ -13,4 +13,4 @@ export const successResponse = (res, data, code=200) => {
         message: data.message || "",
         status: 'success'
     });
-}
+};
