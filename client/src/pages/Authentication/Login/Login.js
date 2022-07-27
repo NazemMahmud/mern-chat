@@ -2,31 +2,23 @@ import React, {useEffect, useReducer, useState} from 'react';
 import AuthLayout from "../../../layout/AuthLayout";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import {
-    Avatar,
-    Button,
-    TextField,
-    FormControlLabel,
-    Checkbox,
-    Link,
-    Typography,
-    Snackbar,
-    Slide,
-    Alert
+import {Avatar, Button, TextField, FormControlLabel, Checkbox,
+    Link, Typography, Snackbar, Slide, Alert
 } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-import {loginStyles} from "./LoginStyles";
-import {login} from "../../../services/Authentication/auth.service";
-import {useDispatch} from "react-redux";
-import {handleLogin} from "../../../redux/authentication";
-import {useNavigate} from "react-router-dom";
-import {checkDisableButton, getAccessToken} from "../../../utility/utils";
+import { loginStyles } from "./LoginStyles";
+import { login } from "../../../services/Authentication/auth.service";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLogin } from "../../../redux/authentication";
+import { useNavigate } from "react-router-dom";
+import { checkDisableButton } from "../../../utility/utils";
 
 
 const Login = () => {
     const classes = loginStyles();
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const { accessToken } = useSelector(state => state.auth);
 
     const [isDisabled, setIsDisabled] = useState(true);
     const [formInput, setFormInput] = useReducer(
@@ -53,10 +45,11 @@ const Login = () => {
 
     // redirect if logged in
     useEffect(() => {
-        if (getAccessToken) {
+        if (accessToken) {
             navigate("/");
         }
-    }, [navigate]);
+    }, [accessToken, navigate]);
+
 
     /** ******************* snackbar UI and actions *******************************/
     const SlideTransition = props => {
@@ -120,7 +113,6 @@ const Login = () => {
         await login(formData)
             .then(response => {
                 dispatch(handleLogin(response.data.data));
-                navigate("/dashboard");
             })
             .catch(error => {
                 // TODO: add a toaster

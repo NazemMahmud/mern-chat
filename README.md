@@ -1,7 +1,7 @@
 ## TODO (Auth):
 - Login: (API, test) [front: redirect condition remains]
 - Registration: (API, test) [front: redirect condition remains]
-- Logout
+- Logout [front]
 - Refresh token [TODO]
 
 # links

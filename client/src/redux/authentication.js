@@ -1,20 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {getUserData} from "../utility/utils";
+import { getUserData, getAccessToken } from "../utility/utils";
 
 
 export const authSlice = createSlice({
   name: 'authentication',
   initialState: {
-    userData: getUserData()
+    userData: getUserData(),
+    accessToken: getAccessToken
   },
   reducers: {
     handleLogin: (state, action) => {
       state.userData = action.payload;
-      state.accessToken = action.payload.accessToken
+      state.accessToken = action.payload.accessToken;
       // state.refreshToken = action.payload.refreshToken
 
-      localStorage.setItem('userData', JSON.stringify(state.userData))
-      localStorage.setItem('accessToken', action.payload.accessToken)
+      localStorage.setItem('userData', JSON.stringify(state.userData));
+      localStorage.setItem('accessToken', state.accessToken);
       // localStorage.setItem('refreshToken, JSON.stringify(action.payload.refreshToken))
     },
     handleLogout: state => {

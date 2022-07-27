@@ -38,7 +38,6 @@ export class UnAuthorized extends CommonErrors {
 export class DuplicateKeyError extends CommonErrors {
     constructor(message) {
         super(message);
-        console.log("message: ", message);
         this.name = 'DuplicateKey';
     }
 }

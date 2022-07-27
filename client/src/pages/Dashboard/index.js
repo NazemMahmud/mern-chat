@@ -1,35 +1,35 @@
 import React, {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {getAccessToken} from "../../utility/utils";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {Button, Link, Typography} from "@mui/material";
-import {logout} from "../../services/Authentication/auth.service";
-import {handleLogout} from "../../redux/authentication";
-import {useDispatch} from "react-redux";
+import { Button, Link, Typography } from "@mui/material";
+import { logout } from "../../services/Authentication/auth.service";
+import { handleLogout } from "../../redux/authentication";
+import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { accessToken } = useSelector(state => state.auth);
+
     // redirect if not logged in
     useEffect(() => {
-        if (!getAccessToken) {
+        if (!accessToken) {
             navigate("/login");
         }
-    }, [navigate]);
+    }, [accessToken, navigate]);
 
     const signOut = async event => {
         event.preventDefault()
         // LATER: add a loader
         await logout()
             .then(response => {
-                dispatch(handleLogout())
-                navigate('/login')
+                dispatch(handleLogout());
             })
             .catch(error => {
-                console.log('error..', error)
+                console.log('error..', error);
             });
-    }
+    };
 
     return (
         <Grid container spacing={0}
