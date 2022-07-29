@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {appConfig} from "../config/config";
 import {store} from "../redux/store";
-import {getAccessToken} from "./utils";
 
 const guestInstance = axios.create({
    baseURL: appConfig.apiBaseUrl,
@@ -23,10 +22,12 @@ const authInstance = axios.create({
 
 authInstance.interceptors.request.use(
     config => {
-       // ** Get token from localStorage / state
-       // ** If token is present add it to request's Authorization Header
-
-       const accessToken = getAccessToken ; // if from store: store.getState().auth.accessToken
+        /**
+         * Get token from localStorage / state
+         * If token is present add it to request's Authorization Header
+         */
+       // if not taking from store, you have to call localStorage to get the access token
+       const accessToken = store.getState().auth.accessToken;
        if (accessToken) {
           // ** eslint-disable-next-line no-param-reassign
           config.headers.Authorization = `Bearer ${accessToken}`;
