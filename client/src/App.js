@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Authentication/Login/Login";
 import Registration from "./pages/Authentication/Registration/Registration";
-import Dashboard from "./pages/ChatDashboard";
+import Messenger from "./pages/ChatDashboard";
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
          <Routes>
              <Route path="/login" element={<Login />} />
              <Route path="/register" element={< Registration />} />
-             <Route path="/chat" element={<Dashboard />} />
-             <Route exact path="/" element={<Dashboard />} />
+             <Route path="/chat" element={<Messenger />} />
+             <Route exact path="/" element={<Messenger />} />
              <Route path="*" element={<Navigate to="/chat" />} />
          </Routes>
      </BrowserRouter>

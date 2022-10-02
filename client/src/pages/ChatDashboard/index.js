@@ -4,8 +4,12 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Box, Button, Dialog, Link, Typography} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import DashboardLayout from "../../layout/DashboardLayout";
-import NavigationBar from "../../components/NavigationBar";
+import {styled} from "@mui/styles";
+
+import MessengerLayout from "../../layout/MessengerLayout";
+import Conversations from "../../components/chat/leftbox/Conversations";
+import ChatBox from "../../components/chat/rightbox/ChatBox";
+// import NavigationBar from "../../components/NavigationBar";
 
 const dialogStyle = {
     height: '95%',
@@ -17,6 +21,18 @@ const dialogStyle = {
     boxShadow: 'none',
     overflow: 'hidden'
 };
+
+const MessengerBox = styled(Box)`
+    display: flex;
+`;
+
+
+const MessageBox = styled(Box)`
+    width: 73%;
+    min-width: 300px;
+    height: 100%;
+    border-left: 1px solid rgba(0, 0, 0, 0.14);
+`;
 
 const ChatDashboard = () => {
     const navigate = useNavigate();
@@ -32,23 +48,23 @@ const ChatDashboard = () => {
 
 
     return (
-        <DashboardLayout>
-            <NavigationBar />
+        <MessengerLayout>
             <Dialog open={true}
                     PaperProps={{ sx: dialogStyle }}
+                    hideBackdrop={true}
             >
+                <MessengerBox>
+                    {/*LEFT BOX*/}
+                    <Conversations></Conversations>
+                    {/*RIGHT BOX*/}
+                    <MessageBox>
+                        <ChatBox></ChatBox>
+                    </MessageBox>
+                </MessengerBox>
+
                 Chat board
             </Dialog>
-            {/*<Box flex={1} overflow="auto">*/}
-            {/*    <Grid container>*/}
-            {/*        <Grid item xs={6}>*/}
-            {/*            <Button onClick={signOut} variant="contained" color="primary">*/}
-            {/*                Log out*/}
-            {/*            </Button>*/}
-            {/*        </Grid>*/}
-            {/*    </Grid>*/}
-            {/*</Box>*/}
-        </DashboardLayout>
+        </MessengerLayout>
 
         // <Grid container spacing={0}
         //       direction="column"
