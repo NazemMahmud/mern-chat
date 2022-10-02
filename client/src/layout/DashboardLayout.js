@@ -4,7 +4,7 @@ import {styled} from "@mui/styles";
 const DashBoardContainer = styled('div') ({
     width: "100%",
     height: "100vh",
-    display: "flex",
+    // display: "flex",
 });
 
 const DashboardLayout = (props) => {

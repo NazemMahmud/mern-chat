@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {styled} from "@mui/styles";
-import {IconButton, Menu, MenuItem} from "@mui/material";
+import {AppBar, IconButton, Menu, MenuItem, Toolbar} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {logout} from "../services/Authentication/auth.service";
 import {handleLogout} from "../redux/authentication";
@@ -45,6 +45,9 @@ const NavigationBar = () => {
 
     return (
         <MainNavBar>
+            {/*<AppBar>*/}
+            {/*    <Toolbar></Toolbar>*/}
+            {/*</AppBar>*/}
             <IconButton style={{color: "white", marginLeft: "20px"}}
                         onClick={(e) => setAnchorEl(e.currentTarget)}>
                 <MoreVertIcon/>

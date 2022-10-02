@@ -2,12 +2,23 @@ import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Box,  Button, Link, Typography } from "@mui/material";
+import {Box, Button, Dialog, Link, Typography} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardLayout from "../../layout/DashboardLayout";
 import NavigationBar from "../../components/NavigationBar";
 
-const Dashboard = () => {
+const dialogStyle = {
+    height: '95%',
+    width: '100%',
+    margin: '20px',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    borderRadius: 0,
+    boxShadow: 'none',
+    overflow: 'hidden'
+};
+
+const ChatDashboard = () => {
     const navigate = useNavigate();
     const { accessToken } = useSelector(state => state.auth);
 
@@ -23,6 +34,11 @@ const Dashboard = () => {
     return (
         <DashboardLayout>
             <NavigationBar />
+            <Dialog open={true}
+                    PaperProps={{ sx: dialogStyle }}
+            >
+                Chat board
+            </Dialog>
             {/*<Box flex={1} overflow="auto">*/}
             {/*    <Grid container>*/}
             {/*        <Grid item xs={6}>*/}
@@ -67,4 +83,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default ChatDashboard;
