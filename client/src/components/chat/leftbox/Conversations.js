@@ -5,9 +5,9 @@ import MenuBar from "./MenuBar";
 import SearchConversation from "./SearchConversation";
 import ConversationList from "./ConversationList";
 
-const Component = styled(Box)`
-    min-width: 450px;
-`;
+const Component = styled(Box) ({
+    minWidth: '450px'
+});
 
 const Conversations = () => {
     return (

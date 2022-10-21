@@ -22,17 +22,21 @@ const dialogStyle = {
     overflow: 'hidden'
 };
 
-const MessengerBox = styled(Box)`
-    display: flex;
-`;
+const MessengerBox = styled(Box)({
+    display: 'flex'
+});
 
 
-const MessageBox = styled(Box)`
-    width: 73%;
-    min-width: 300px;
-    height: 100%;
-    border-left: 1px solid rgba(0, 0, 0, 0.14);
-`;
+// const LeftComponent = styled(Box) ({
+//     minWidth: '450px'
+// });
+
+const MessageBox = styled(Box)({
+    width: '73%',
+    minWidth: '300px',
+    height: '100%',
+    borderLeft: '1px solid rgba(0, 0, 0, 0.14)'
+});
 
 const ChatDashboard = () => {
     const navigate = useNavigate();
@@ -52,17 +56,20 @@ const ChatDashboard = () => {
             <Dialog open={true}
                     PaperProps={{ sx: dialogStyle }}
                     hideBackdrop={true}
+                    maxWidth={'md'}
             >
                 <MessengerBox>
                     {/*LEFT BOX*/}
-                    <Conversations></Conversations>
+                    {/*<LeftComponent>*/}
+                    {/*    chat menu*/}
+                        <Conversations></Conversations>
+                    {/*</LeftComponent>*/}
                     {/*RIGHT BOX*/}
                     <MessageBox>
-                        <ChatBox></ChatBox>
+                        chat box
+                        {/*<ChatBox></ChatBox>*/}
                     </MessageBox>
                 </MessengerBox>
-
-                Chat board
             </Dialog>
         </MessengerLayout>
 
