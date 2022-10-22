@@ -1,8 +1,8 @@
 import React from "react";
-import {styled} from "@mui/styles";
-import {Box} from "@mui/material";
-import {Chat as NewMessageIcon, MoreVert} from '@mui/icons-material';
-
+import { styled } from "@mui/styles";
+import { Box } from "@mui/material";
+import { Chat as NewMessageIcon } from '@mui/icons-material';
+import MenuItemDropDown from "./MenuItemDropDown";
 import avatar from '../../../../src/assets/profile-avatar.png'
 
 const Component = styled(Box) ({
@@ -39,10 +39,10 @@ const MenuBar = () => {
             <Image src={avatar} />
             <Wrapper>
                 <NewMessageIcon />
-                <MoreVert />
+                <MenuItemDropDown />
             </Wrapper>
         </Component>
     )
 }
 
-export default MenuBar
+export default MenuBar;

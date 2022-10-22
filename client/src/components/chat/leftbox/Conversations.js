@@ -1,6 +1,6 @@
-import React from "react";
-import {styled} from "@mui/styles";
-import {Box} from "@mui/material";
+import React, { useState } from "react";
+import { styled } from "@mui/styles";
+import { Box } from "@mui/material";
 import MenuBar from "./MenuBar";
 import SearchConversation from "./SearchConversation";
 import ConversationList from "./ConversationList";
@@ -10,13 +10,15 @@ const Component = styled(Box) ({
 });
 
 const Conversations = () => {
+    const [text, setText] = useState('');
+
     return (
         <Component>
             <MenuBar></MenuBar>
-            <SearchConversation></SearchConversation>
+            <SearchConversation setText={setText}></SearchConversation>
             <ConversationList></ConversationList>
         </Component>
     )
 }
 
-export default Conversations
+export default Conversations;
