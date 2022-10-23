@@ -1,6 +1,6 @@
 import React from 'react';
-import {styled} from "@mui/styles";
-import NavigationBar from "../components/NavigationBar";
+import { styled } from "@mui/styles";
+import BackNavBar from "../components/BackNavBar";
 
 const MessengerContainer = styled('div') ({
     width: '100%',
@@ -12,7 +12,7 @@ const MessengerContainer = styled('div') ({
 const MessengerLayout = (props) => {
     return (
         <MessengerContainer>
-            <NavigationBar />
+            <BackNavBar />
             {props.children}
         </MessengerContainer>
     );

@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+// material
 import { MoreVert } from '@mui/icons-material';
 import { Menu, MenuItem } from '@mui/material';
 import { styled } from "@mui/styles";
 
-// import { googleLogout } from '@react-oauth/google';
-// import { AccountContext } from '../../../context/AccountProvider';
-// import { UserContext } from '../../../context/UserProvider';
-
-// import { clientId } from '../../../constants/data';
-
 //components
-// import InfoDrawer from '../../drawer/Drawer';
+import ProfileDrawer from "./drawer/ProfileDrawer";
+// service handler
+import { logout } from "../../../services/Authentication/auth.service";
+import { handleLogout } from "../../../redux/authentication";
+
 
 const MenuOption = styled(MenuItem)({
     fontSize: "14px",
@@ -18,19 +18,11 @@ const MenuOption = styled(MenuItem)({
     color: "#4A4A4A"
 });
 
-// const Logout = styled(googleLogout)({
-//     border: "none",
-//     boxShadow: "none"
-// });
-
 const MenuItemDropDown = () => {
 
     const [open, setOpen] = useState(false);
-    // const [openDrawer, setOpenDrawer] = useState(false);
-
-    // const { setAccount, setShowloginButton, showlogoutButton, setShowlogoutButton } = useContext(AccountContext);
-    // const { setPerson } = useContext(UserContext);
-
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const dispatch = useDispatch();
 
     const handleClick = (event) => {
         setOpen(event.currentTarget);
@@ -40,19 +32,22 @@ const MenuItemDropDown = () => {
         setOpen(null);
     };
 
-    // const onSignoutSuccess = () => {
-    //     alert("You have been logged out successfully");
-    //     console.clear();
-        // setShowlogoutButton(false);
-        // setShowloginButton(true);
-        // setAccount('');
-        // setPerson({});
-    // };
+    const signOut = async event => {
+        event.preventDefault()
+        // LATER: add a loader
+        await logout()
+            .then(response => {
+                dispatch(handleLogout());
+            })
+            .catch(error => {
+                console.log('error..', error);
+            });
+    };
 
-    // const toggleDrawer = () => {
-    //     setOpenDrawer(true);
-    // }
-
+    const toggleDrawer = () => {
+        handleClose();
+        setOpenDrawer(true);
+    }
 
     return (
         <>
@@ -72,23 +67,12 @@ const MenuItemDropDown = () => {
                     horizontal: 'right',
                 }}
             >
-                {/*onClick={() => { handleClose(); toggleDrawer()}}*/}
-                <MenuOption> Profile </MenuOption>
-                <MenuOption> Settings </MenuOption>
-                {/*<MenuOption onClick={() => { handleClose(); }}>*/}
-                    {/* { showlogoutButton ?
-                    <Logout
-                        clientId={clientId}
-                        buttonText="Logout"
-                        onLogoutSuccess={onSignoutSuccess}
-                    >
-                    </Logout> : null
-                } */}
-                {/*</MenuOption>*/}
+                <MenuOption onClick={toggleDrawer}> Profile </MenuOption>
+                <MenuOption onClick={signOut}> Logout </MenuOption>
             </Menu>
-            {/*<InfoDrawer open={openDrawer} setOpen={setOpenDrawer} profile={true} />*/}
+            <ProfileDrawer open={openDrawer} setOpen={setOpenDrawer} profile={true} />
         </>
     )
-}
+};
 
 export default MenuItemDropDown;

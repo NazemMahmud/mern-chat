@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/styles";
 import { Box } from "@mui/material";
 import { Chat as NewMessageIcon } from '@mui/icons-material';
 import MenuItemDropDown from "./MenuItemDropDown";
+
 import avatar from '../../../../src/assets/profile-avatar.png'
+import ProfileDrawer from "./drawer/ProfileDrawer";
 
 const Component = styled(Box) ({
     height: "44px",
@@ -34,14 +36,23 @@ const Wrapper = styled(Box) ({
 });
 
 const MenuBar = () => {
+
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const toggleDrawer = () => {
+        setOpenDrawer(true);
+    }
+
     return (
-        <Component>
-            <Image src={avatar} />
-            <Wrapper>
-                <NewMessageIcon />
-                <MenuItemDropDown />
-            </Wrapper>
-        </Component>
+        <>
+            <Component>
+                <Image src={avatar} onClick={toggleDrawer} />
+                <Wrapper>
+                    <NewMessageIcon />
+                    <MenuItemDropDown />
+                </Wrapper>
+            </Component>
+            <ProfileDrawer open={openDrawer} setOpen={setOpenDrawer} profile={true} />
+        </>
     )
 }
 
