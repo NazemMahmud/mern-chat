@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { Box, Typography } from "@mui/material";
 import avatar from "../../../../assets/profile-avatar.png";
 
 import { styled } from "@mui/styles";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const ImageContainer = styled(Box)({
@@ -63,6 +63,6 @@ const Profile = () => {
             </BoxWrapper>
         </>
     )
-}
+};
 
 export default Profile;

@@ -4,8 +4,8 @@ import { Box } from "@mui/material";
 import { Chat as NewMessageIcon } from '@mui/icons-material';
 import MenuItemDropDown from "./MenuItemDropDown";
 
-import avatar from '../../../../src/assets/profile-avatar.png'
-import ProfileDrawer from "./drawer/ProfileDrawer";
+import avatar from '../../../../assets/profile-avatar.png'
+import ProfileDrawer from "../drawer/ProfileDrawer";
 
 const Component = styled(Box) ({
     height: "44px",

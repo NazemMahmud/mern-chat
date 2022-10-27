@@ -9,6 +9,7 @@ import {styled} from "@mui/styles";
 import MessengerLayout from "../../layout/MessengerLayout";
 import Conversations from "../../components/chat/leftbox/Conversations";
 import ChatBox from "../../components/chat/rightbox/ChatBox";
+import EmptyChatBox from "../../components/chat/rightbox/EmptyChatBox";
 // import NavigationBar from "../../components/NavigationBar";
 
 const dialogStyle = {
@@ -67,6 +68,7 @@ const ChatDashboard = () => {
                     {/*RIGHT BOX*/}
                     <MessageBox>
                         chat box
+                        <EmptyChatBox />
                         {/*<ChatBox></ChatBox>*/}
                     </MessageBox>
                 </MessengerBox>

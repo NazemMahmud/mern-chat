@@ -6,10 +6,10 @@ import { Menu, MenuItem } from '@mui/material';
 import { styled } from "@mui/styles";
 
 //components
-import ProfileDrawer from "./drawer/ProfileDrawer";
+import ProfileDrawer from "../drawer/ProfileDrawer";
 // service handler
-import { logout } from "../../../services/Authentication/auth.service";
-import { handleLogout } from "../../../redux/authentication";
+import { logout } from "../../../../services/Authentication/auth.service";
+import { handleLogout } from "../../../../redux/authentication";
 
 
 const MenuOption = styled(MenuItem)({

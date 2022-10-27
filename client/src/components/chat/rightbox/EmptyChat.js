@@ -7,7 +7,7 @@ const Component = styled(Box)({
     background:" #f8f9fa",
     padding: "30px 0",
     textAlign: "center",
-    height: "100vh"
+    height: "100%"
 });
 
 const Container = styled(Box)({
@@ -35,17 +35,17 @@ const SubTitle = styled(Typography)({
 });
 
 const StyledDivider = styled(Divider)({
-    margin: "40px 0 !important",
-    opacity: "1"
+    margin: "40px 0",
+    opacity: "0.4"
 });
 
-const EmptyChatBox = () => {
+const EmptyChat = () => {
 
     return (
         <Component>
             <Container>
                 <Image src={emptyChatImage} alt="empty" />
-                <Title>WhatsApp Clone Web</Title>
+                <Title>WhatsApp Web</Title>
                 <SubTitle>Now send and receive messages without keeping your phone online.</SubTitle>
                 <SubTitle>Use WhatsApp on up to 4 linked devices and 1 phone at the same time. </SubTitle>
                 <StyledDivider />
@@ -54,4 +54,4 @@ const EmptyChatBox = () => {
     )
 }
 
-export default EmptyChatBox;
+export default EmptyChat;

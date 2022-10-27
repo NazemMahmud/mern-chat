@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { styled } from "@mui/styles";
 import { Box } from "@mui/material";
-import MenuBar from "./MenuBar";
-import SearchConversation from "./SearchConversation";
+import MenuBar from "./menu/MenuBar";
+import SearchConversation from "./menu/SearchConversation";
 import ConversationList from "./ConversationList";
 
 const Component = styled(Box) ({
