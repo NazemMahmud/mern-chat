@@ -3,6 +3,7 @@
 - Registration: (API, test) [front: redirect condition remains]
 - Logout [front]
 - Refresh token [TODO]
+- call API of all Users from front (using socket, 1stly normal, then WebRTC) 
 
 # links
 https://github.com/satyavamsi/Whatsapp/tree/master/src/components/js

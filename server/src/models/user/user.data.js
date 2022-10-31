@@ -1,4 +1,4 @@
-import {UserModel} from "./user.schema.js";
+import { UserModel } from "./user.schema.js";
 
 /**
  * get single data based on condition
@@ -14,8 +14,13 @@ const createNew = async data => {
     return model.save();
 }
 
+const getAll = async () => {
+    return UserModel.find({});
+}
+
 export const User = {
     model: UserModel,
     getOne,
-    createNew
+    createNew,
+    getAll
 }

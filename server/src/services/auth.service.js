@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import {User} from "../models/user/user.data.js";
-import {NotFoundError, UnAuthorized, DuplicateKeyError} from "../utilities/error-generate.js";
+import { User } from "../models/user/user.data.js";
+import { NotFoundError, UnAuthorized, DuplicateKeyError } from "../utilities/error-generate.js";
 
 const Model = User;
 
