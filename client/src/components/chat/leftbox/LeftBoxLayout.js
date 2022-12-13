@@ -9,7 +9,7 @@ const Component = styled(Box) ({
     minWidth: '450px'
 });
 
-const Conversations = () => {
+const LeftBoxLayout = () => {
     const [text, setText] = useState('');
 
     return (
@@ -21,4 +21,4 @@ const Conversations = () => {
     )
 }
 
-export default Conversations;
+export default LeftBoxLayout;
