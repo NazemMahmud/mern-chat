@@ -27,9 +27,9 @@ const Container = styled(Box) ({
 
 const Timestamp = styled(Typography) ({
     fontSize: "12px",
-    marginLeft: "auto",
+    marginLeft: "auto !important",
     color: "#00000099",
-    marginRight: "20px"
+    marginRight: "20px !important"
 });
 
 const Text = styled(Typography) ({
