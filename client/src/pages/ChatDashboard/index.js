@@ -67,9 +67,8 @@ const ChatDashboard = () => {
                     {/*</LeftComponent>*/}
                     {/*RIGHT BOX*/}
                     <MessageBox>
-                        chat box
-                        <EmptyChatBox />
-                        {/*<ChatBox></ChatBox>*/}
+                        {/*<EmptyChatBox />*/}
+                        <ChatBox></ChatBox>
                     </MessageBox>
                 </MessengerBox>
             </Dialog>
