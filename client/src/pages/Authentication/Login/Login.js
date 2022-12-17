@@ -16,7 +16,7 @@ import { checkDisableButton } from "../../../utility/utils";
 
 const Login = () => {
     const classes = loginStyles();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { accessToken } = useSelector(state => state.auth);
 

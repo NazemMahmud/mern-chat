@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext }  from "react";
+import {useDispatch, useSelector} from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Divider } from "@mui/material";
 
@@ -8,6 +9,7 @@ import { Box, Divider } from "@mui/material";
 //components
 import Conversation from './Conversation';
 import { getUsers } from "../../../services/users.service";
+import { setFriendsList } from "../../../redux/friends";
 
 const Component = styled(Box)({
     overflow: "overlay",
@@ -22,18 +24,27 @@ const StyledDivider = styled(Divider)({
 
 const ConversationList = ({ text }) => {
     const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
+    const friendsList = useSelector(state => state.friends);
 
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
 
     useEffect(() => {
         const fetchData = async () => {
             let response = await getUsers();
-            // const data = response.data.data;
+            const data = response.data.data;
+            dispatch(setFriendsList(data));
             // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-            // console.log('filtered data: ', data);
-            setUsers(response.data.data);
+            console.log('filtered data: ', data);
+            setUsers(data);
         }
-        fetchData();
+
+        // if (friendsList.length === 0) {
+            fetchData();
+        // } else {
+        //     console.log('friendsList: ', friendsList);
+        //     setUsers(friendsList);
+        // }
     }, []);
     // }, [text]);
 

@@ -29,7 +29,7 @@ export const authSlice = createSlice({
       // localStorage.removeItem('refreshToken')
     }
   }
-})
+});
 
 export const { handleLogin, handleLogout } = authSlice.actions
 
