@@ -39,12 +39,7 @@ const ConversationList = ({ text }) => {
             setUsers(data);
         }
 
-        // if (friendsList.length === 0) {
-            fetchData();
-        // } else {
-        //     console.log('friendsList: ', friendsList);
-        //     setUsers(friendsList);
-        // }
+        fetchData();
     }, []);
     // }, [text]);
 

@@ -19,3 +19,8 @@ export const checkDisableButton = formInput => {
     }
     return false
 }
+
+
+export const getFriend = () => {
+    // TODO
+}

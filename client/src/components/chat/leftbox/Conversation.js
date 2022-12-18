@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Typography  } from "@mui/material";
 
 import avatar from "../../../assets/profile-avatar.png";
+import {selectFriend} from "../../../redux/friends";
+
 
 
 const Component = styled(Box)({
@@ -39,16 +42,20 @@ const Text = styled(Typography) ({
 });
 
 const Conversation = ({ user }) => {
+    const dispatch = useDispatch();
+
     console.log('user: ', user);
     // TODO: picture will be added later
     const imageUrl = user.picture || avatar;
 
-    const getUser = async () => {
-        // TODO
+    const getFriend = async () => {
+        // TODO: set the selected friend info
+        dispatch(selectFriend(user))
+        // GET selected friends conversation data
     }
 
     return (
-        <Component onClick={() => getUser()}>
+        <Component onClick={() => getFriend()}>
             <Box>
                 <Image src={imageUrl} alt="user profile picture" />
             </Box>
