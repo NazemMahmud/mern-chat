@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import io from "socket.io-client";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Box, Button, Dialog, Link, Typography} from "@mui/material";
@@ -11,7 +10,8 @@ import MessengerLayout from "../../layout/MessengerLayout";
 import LeftBoxLayout from "../../components/chat/leftbox/LeftBoxLayout";
 import ChatBox from "../../components/chat/rightbox/ChatBox";
 import EmptyChatBox from "../../components/chat/rightbox/EmptyChatBox";
-import { connectWithSocketServer } from "../../config/socket";
+import { connectWithSocketServer } from "../../socket/socketConnection";
+
 // import NavigationBar from "../../components/NavigationBar";
 
 const dialogStyle = {
@@ -50,22 +50,11 @@ const ChatDashboard = () => {
         if (!accessToken) {
             navigate("/login");
         }
-            // else {
-        //     connectWithSocketServer();
-        // }
+        else {
+            console.log('connect');
+            connectWithSocketServer();
+        }
     }, [accessToken, navigate]);
-
-    useEffect(() => {
-        // connectWithSocketServer();
-        const socket = io('http://localhost:5000')
-        socket.on('connect', ()=>console.log(socket.id))
-        socket.on('connect_error', ()=>{
-            setTimeout(()=>socket.connect(),5000)
-        })
-        // socket.on('time', (data)=>setTime(data))
-        // socket.on('disconnect',()=>setTime('server disconnected'))
-    }, []);
-
 
 
     return (
