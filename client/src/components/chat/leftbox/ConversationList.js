@@ -35,7 +35,7 @@ const ConversationList = ({ text }) => {
             const data = response.data.data;
             dispatch(setFriendsList(data));
             // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-            console.log('filtered data: ', data);
+            // console.log('filtered data: ', data);
             setUsers(data);
         }
 

@@ -44,7 +44,7 @@ const Text = styled(Typography) ({
 const Conversation = ({ user }) => {
     const dispatch = useDispatch();
 
-    console.log('user: ', user);
+    // console.log('user: ', user);
     // TODO: picture will be added later
     const imageUrl = user.picture || avatar;
 
