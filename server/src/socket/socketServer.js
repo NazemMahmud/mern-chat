@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import { CLIENT_URL_DEV } from "../config/env.config.js";
+import newConnectionHandler from "./socketHandlers/newConnectionHandler.js";
 
 
 const createSocketServer = (server) => {
@@ -16,6 +17,9 @@ const createSocketServer = (server) => {
         socket.on('message', (msg) => {
             console.log(`Received message: ${msg}`);
         });
+
+        // when new user is loggedin/active, new connection will be made and s/he will be an online user
+        newConnectionHandler(socket, io);
     });
 
 };
