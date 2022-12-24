@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext }  from "react";
+import React, { useState, useEffect }  from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Divider } from "@mui/material";
 
 
 //components
-import Conversation from './Conversation';
+import FriendItem from './FriendItem';
 import { getUsers } from "../../../services/users.service";
 import { setFriendsList } from "../../../redux/friends";
+import { getUserData } from "../../../utility/utils";
 
 const Component = styled(Box)({
     overflow: "overlay",
@@ -20,10 +21,10 @@ const StyledDivider = styled(Divider)({
     opacity: ".6"
 });
 
-const ConversationList = ({ text }) => {
+const FriendsList = () => {
     const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
-    const friendsList = useSelector(state => state.friends);
+    const account = getUserData();
 
 
     useEffect(() => {
@@ -31,25 +32,19 @@ const ConversationList = ({ text }) => {
             let response = await getUsers();
             const data = response.data.data;
             dispatch(setFriendsList(data));
-            // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-            // console.log('filtered data: ', data);
             setUsers(data);
         }
 
         fetchData();
     }, []);
 
-    // useEffect(() => {
-        // TODO: addUser' & getUsers using socket to set activeusers
-    // }, [])
-
     return (
         <Component>
             {
                 users && users.map((user, index) => (
-
+                    user.id !== account.id &&
                     <>
-                        <Conversation user={user} />
+                        <FriendItem user={user} />
                         {
                             users.length !== (index + 1)  && <StyledDivider />
                         }
@@ -60,4 +55,4 @@ const ConversationList = ({ text }) => {
     )
 };
 
-export default ConversationList
+export default FriendsList;

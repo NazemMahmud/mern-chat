@@ -40,8 +40,6 @@ const Status = styled(Typography)({
     marginLeft: "12px !important"
 });
 
-// TODO: check chatBuddy is active or not
-
 const ChatBoxHeader = () => {
     const chatBuddy = useSelector(state => state.friends.selectedFriend);
     const profileUrl = chatBuddy.picture || avatar;

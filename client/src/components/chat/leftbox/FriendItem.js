@@ -41,7 +41,7 @@ const Text = styled(Typography) ({
     fontSize: "14px"
 });
 
-const Conversation = ({ user }) => {
+const FriendItem = ({ user }) => {
     const dispatch = useDispatch();
 
     // console.log('user: ', user);
@@ -61,8 +61,8 @@ const Conversation = ({ user }) => {
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{user.name}</Typography>
-                    <Timestamp> time data </Timestamp>
+                    <Typography> { user.name } </Typography>
+                    <Timestamp> last msg time data </Timestamp>
 
                 </Container>
                 <Box>
@@ -73,4 +73,4 @@ const Conversation = ({ user }) => {
     )
 }
 
-export default Conversation;
+export default FriendItem;
