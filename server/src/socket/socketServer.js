@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import { CLIENT_URL_DEV } from "../config/env.config.js";
 import newConnectionHandler from "./socketHandlers/newConnectionHandler.js";
+import { checkAuth } from "../middlewares/socket.auth.middleware.js";
 
 
 const createSocketServer = (server) => {
@@ -11,6 +12,12 @@ const createSocketServer = (server) => {
             methods: ["GET", "POST"],
         },
     });
+
+    io.use((socket, next) => {
+        checkAuth(socket, next);
+    });
+
+
     io.on('connection', (socket) => {
         console.log(`New socket connection connected: ${socket.id}`);
 

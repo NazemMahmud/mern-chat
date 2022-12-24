@@ -1,8 +1,7 @@
 import { addNewConnectedUser, getOnlineUsers} from "../connectedUsers.js";
 
 const newConnectionHandler = (socket, io) => {
-    // TODO: needs user id
-    addNewConnectedUser({ socketId: socket.id, userId: 1 });
+    addNewConnectedUser({ socketId: socket.id, userId: socket.user.id });
 
     // emit online users to all connected users
     io.emit("online-users", getOnlineUsers());

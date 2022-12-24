@@ -45,6 +45,7 @@ const Status = styled(Typography)({
 const ChatBoxHeader = () => {
     const chatBuddy = useSelector(state => state.friends.selectedFriend);
     const profileUrl = chatBuddy.picture || avatar;
+    const activeUsers = useSelector(state => state.friends.onlineUsers);
 
     return (
         <Header>
@@ -54,8 +55,7 @@ const ChatBoxHeader = () => {
                     <Image src={ profileUrl } alt="display picture" />
                     <Box>
                         <Name> { chatBuddy.name } </Name>
-                        {/*{ TODO: something like this: isActiveUsers?.find(user => user.isActive === chatBuddy.isActive) ? 'Online' : 'Offline'}*/}
-                        <Status> Online </Status>
+                        <Status> { activeUsers.find(user => user.userId === chatBuddy.id) ? 'Online' : 'Offline'} </Status>
                     </Box>
                 </>
             }
