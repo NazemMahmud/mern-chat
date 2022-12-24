@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
     const navigate = useNavigate();
-    const classes = registrationStyles(); // styling
+    const classes = registrationStyles();
     const [isDisabled, setIsDisabled] = useState(true);
 
     // redirect if logged in

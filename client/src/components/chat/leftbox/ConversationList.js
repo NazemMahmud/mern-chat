@@ -3,8 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Divider } from "@mui/material";
 
-// import { AccountContext } from '../../../context/AccountProvider';
-
 
 //components
 import Conversation from './Conversation';
@@ -27,7 +25,6 @@ const ConversationList = ({ text }) => {
     const dispatch = useDispatch();
     const friendsList = useSelector(state => state.friends);
 
-    // const { account, socket, setActiveUsers } = useContext(AccountContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,17 +38,12 @@ const ConversationList = ({ text }) => {
 
         fetchData();
     }, []);
-    // }, [text]);
 
     // useEffect(() => {
-        // socket.current.emit('addUser', account);
-        // socket.current.on("getUsers", users => {
-        //     setActiveUsers(users);
-        // })
-    // }, [account])
+        // TODO: addUser' & getUsers using socket to set activeusers
+    // }, [])
 
     return (
-        // user.sub !== account.sub &&
         <Component>
             {
                 users && users.map((user, index) => (

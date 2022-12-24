@@ -61,8 +61,6 @@ const Footer = ({ value="" }) => {
             />
 
             <Search>
-                {/*onChange={(e) => setValue(e.target.value)}*/}
-                {/*onKeyPress={(e) => sendText(e)}*/}
                 <InputField
                     placeholder="Type your message"
                     inputProps={{ 'aria-label': 'search' }}

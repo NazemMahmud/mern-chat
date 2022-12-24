@@ -54,7 +54,7 @@ const ChatBoxHeader = () => {
                     <Image src={ profileUrl } alt="display picture" />
                     <Box>
                         <Name> { chatBuddy.name } </Name>
-                        {/*{ isActiveUsers?.find(user => user.isActive === chatBuddy.isActive) ? 'Online' : 'Offline'}*/}
+                        {/*{ TODO: something like this: isActiveUsers?.find(user => user.isActive === chatBuddy.isActive) ? 'Online' : 'Offline'}*/}
                         <Status> Online </Status>
                     </Box>
                 </>

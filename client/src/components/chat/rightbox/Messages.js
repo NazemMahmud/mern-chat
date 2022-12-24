@@ -23,20 +23,12 @@ const Messages = () => {
     return (
         <MessageWrapper>
             <Component>
-                {/*{*/}
-                {/*    messages && messages.map(message => (*/}
-                {/*        <Container ref={scrollRef}>*/}
+                {/*        <Container>*/}
                 {/*            /!*<Message message={message} />*!/*/}
                 {/*        </Container>*/}
-                {/*    ))*/}
-                {/*}*/}
+
             </Component>
-            {/*    sendText={sendText}*/}
-            {/*    value={value}*/}
-            {/*    setValue={setValue}*/}
-            {/*    setFile={setFile}*/}
-            {/*    file={file}*/}
-            {/*    setImage={setImage}*/}
+
             <Footer />
         </MessageWrapper>
     )
