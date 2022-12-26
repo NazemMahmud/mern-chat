@@ -1,8 +1,7 @@
 import React from "react";
 import { styled } from "@mui/styles";
-import { Box, Typography, InputBase } from "@mui/material";
+import { Box, InputBase } from "@mui/material";
 import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
-import avatar from "../../../assets/profile-avatar.png";
 
 
 const Component = styled(Box)({

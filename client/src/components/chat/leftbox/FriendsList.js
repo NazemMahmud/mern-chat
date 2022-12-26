@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Divider } from "@mui/material";
 
@@ -43,12 +43,12 @@ const FriendsList = () => {
             {
                 users && users.map((user, index) => (
                     user.id !== account.id &&
-                    <>
+                    <div key={user.id}>
                         <FriendItem user={user} />
                         {
                             users.length !== (index + 1)  && <StyledDivider />
                         }
-                    </>
+                    </div>
                 ))
             }
         </Component>

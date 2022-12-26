@@ -24,3 +24,10 @@ export const checkDisableButton = formInput => {
 export const getFriend = () => {
     // TODO
 }
+
+// TODO: needs to update, AM, PM better
+export const formatDate = (date) => {
+    const hours = new Date(date).getHours();
+    const minutes = new Date(date).getMinutes();
+    return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+}
