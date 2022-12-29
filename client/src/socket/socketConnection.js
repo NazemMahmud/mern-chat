@@ -1,12 +1,11 @@
 import { io } from 'socket.io-client';
 import { store } from "../redux/store";
 import { setOnlineUsers } from "../redux/friends";
-import { getAccessToken } from "../utility/utils";
 
 
-const connectWithSocketServer = () => {
+const connectWithSocketServer = (accessToken) => {
     const socket = io(process.env.REACT_APP_SOCKET_SERVER_URL, {
-        auth: { token: getAccessToken }
+        auth: { token: accessToken }
     })
 
     socket.on("connect", () => {

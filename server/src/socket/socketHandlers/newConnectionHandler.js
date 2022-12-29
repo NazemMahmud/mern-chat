@@ -1,4 +1,4 @@
-import { addNewConnectedUser, getOnlineUsers} from "../connectedUsers.js";
+import { addNewConnectedUser, getOnlineUsers } from "../connectedUsers.js";
 
 const newConnectionHandler = (socket, io) => {
     addNewConnectedUser({ socketId: socket.id, userId: socket.user.id });

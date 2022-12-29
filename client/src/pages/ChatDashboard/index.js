@@ -47,12 +47,13 @@ const ChatDashboard = () => {
 
     // redirect if not logged in
     useEffect(() => {
+        const token = accessToken;
         if (!accessToken) {
             navigate("/login");
         }
         else {
             console.log('connect');
-            connectWithSocketServer();
+            connectWithSocketServer(token);
         }
     }, [accessToken, navigate]);
 

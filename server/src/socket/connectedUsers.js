@@ -18,4 +18,10 @@ const getOnlineUsers = () => {
     return onlineUsers;
 };
 
-export { addNewConnectedUser, getOnlineUsers };
+const removeConnectedUser = ({ socketId }) => {
+    if (connectedUsers.has(socketId)) {
+        connectedUsers.delete(socketId);
+    }
+};
+
+export { addNewConnectedUser, getOnlineUsers, removeConnectedUser };
