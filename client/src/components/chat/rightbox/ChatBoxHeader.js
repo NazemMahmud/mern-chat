@@ -1,9 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
 import { Search, MoreVert } from '@mui/icons-material';
 import avatar from "../../../assets/profile-avatar.png";
-import {useSelector} from "react-redux";
 
 
 const Header = styled(Box)({
@@ -40,8 +40,7 @@ const Status = styled(Typography)({
     marginLeft: "12px !important"
 });
 
-const ChatBoxHeader = () => {
-    const chatBuddy = useSelector(state => state.friends.selectedFriend);
+const ChatBoxHeader = ({ chatBuddy }) => {
     const profileUrl = chatBuddy.picture || avatar;
     const activeUsers = useSelector(state => state.friends.onlineUsers);
 

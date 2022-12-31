@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { getCookie, setCookie } from "../utility/cookies";
 
 
@@ -14,7 +14,7 @@ export const userSlice = createSlice({
             state.friends = action.payload;
             setCookie('friends', action.payload);
         },
-        selectFriend: (state, action) => {
+        setChatFriend: (state, action) => {
             state.selectedFriend = action.payload;
         },
         setOnlineUsers: (state, action) => {
@@ -24,6 +24,6 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setFriendsList, selectFriend, setOnlineUsers } = userSlice.actions
+export const { setFriendsList, setChatFriend, setOnlineUsers } = userSlice.actions
 
 export default userSlice.reducer;
