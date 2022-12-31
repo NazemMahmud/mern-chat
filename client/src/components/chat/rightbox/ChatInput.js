@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/styles";
 import { Box, InputBase } from "@mui/material";
 import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
@@ -24,7 +24,6 @@ const Search = styled(Box)({
     width: "calc(94% - 100px)"
 });
 
-
 const InputField = styled(InputBase)({
     width: "100%",
     padding: "20px",
@@ -38,13 +37,11 @@ const ClipIcon = styled(AttachFile)({
 });
 
 
+const ChatInput = ({ sendText, value, setValue }) => {
 
-
-const Footer = ({ value="" }) => {
-
-    const onFileChange = (e) => {
-        // TODO: later
-    };
+        const onFileChange = (e) => {
+            // TODO: later
+        }
 
     return (
         <Component>
@@ -63,6 +60,8 @@ const Footer = ({ value="" }) => {
                 <InputField
                     placeholder="Type your message"
                     inputProps={{ 'aria-label': 'search' }}
+                    onChange={(e) => setValue(e.target.value)}
+                    onKeyPress={(e) => sendText(e)}
                     value={value}
                 />
             </Search>
@@ -71,4 +70,4 @@ const Footer = ({ value="" }) => {
     )
 }
 
-export default Footer;
+export default ChatInput;
