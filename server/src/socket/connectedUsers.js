@@ -9,10 +9,12 @@ const getOnlineUsers = () => {
     const onlineUsers = [];
 
     connectedUsers.forEach((value, key) => {
-        onlineUsers.push({
-            userId: value.userId,
-            socketId: key,
-        });
+        if (!onlineUsers.some(item => item.userId === value.userId)) {
+            onlineUsers.push({
+                userId: value.userId,
+                socketId: key,
+            });
+        }
     });
 
     return onlineUsers;
