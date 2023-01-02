@@ -3,7 +3,7 @@
 - Registration: (API, test) [front: redirect condition remains]
 - Logout [front]
 - Refresh token [TODO]
-- call API of all Users from front (using socket, 1stly normal, then WebRTC)
+- get conversations of 2 users using socket 1st time [working on]
 
 
 # Installation

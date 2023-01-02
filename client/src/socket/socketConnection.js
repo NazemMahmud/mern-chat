@@ -28,7 +28,7 @@ const connectWithSocketServer = (accessToken) => {
 };
 
 const fetchChatHistory = ({ receiverId }) => {
-    socket.emit('get-chat-history', { receiverId })
+    socket.emit('get-direct-chat-history', { receiverId })
 }
 
 export { connectWithSocketServer, fetchChatHistory };
