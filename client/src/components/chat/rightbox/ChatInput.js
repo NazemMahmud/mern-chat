@@ -37,7 +37,7 @@ const ClipIcon = styled(AttachFile)({
 });
 
 
-const ChatInput = ({ sendText, value, setValue }) => {
+const ChatInput = ({ sendText, message, setValue }) => {
 
         const onFileChange = (e) => {
             // TODO: later
@@ -62,7 +62,7 @@ const ChatInput = ({ sendText, value, setValue }) => {
                     inputProps={{ 'aria-label': 'search' }}
                     onChange={(e) => setValue(e.target.value)}
                     onKeyPress={(e) => sendText(e)}
-                    value={value}
+                    value={message}
                 />
             </Search>
             <Mic />

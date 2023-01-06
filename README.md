@@ -4,6 +4,9 @@
 - Logout [front]
 - Refresh token [TODO]
 - get conversations of 2 users using socket 1st time [working on]
+  - send and store message, create conversation
+  - get conversation initially if it exits
+  - also update in front-end in real time
 
 
 # Installation

@@ -27,10 +27,9 @@ const ChatBox = () => {
 
     return (
         <Component >
-            {/* TODO: need user (chat friend) info here*/}
             <ChatBoxHeader chatBuddy={chatBuddy} />
             {/* TODO: need both (chat friend & conversation messages) info here*/}
-            <Messages />
+            <Messages chatDetails={chatDetails} />
         </Component>
     )
 }

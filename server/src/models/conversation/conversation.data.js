@@ -6,12 +6,17 @@ import { ConversationModel } from "./conversation.schema.js";
  * @returns {Promise<Query<any, any, {}, any>>}
  * @param receiverId
  * @param senderId
+ * @param type (DIRECT | GROUP)
  */
-const findOne = async (receiverId, senderId) => {
-    return ConversationModel.findOne({
-        participants: { $all: [receiverId, senderId] },
-        type: "DIRECT", // ??
-    });
+const findOne = async (receiverId, senderId, type = '') => {
+    const condition = {
+        participants: { $all: [receiverId, senderId] }
+    };
+
+    if (type === 'DIRECT') {
+        condition.type = type;
+    }
+    return ConversationModel.findOne(condition);
 }
 
 

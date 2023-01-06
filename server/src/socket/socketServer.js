@@ -6,6 +6,7 @@ import newConnectionHandler from "./socketHandlers/newConnectionHandler.js";
 import disconnectHandler from "./socketHandlers/disconnectHandler.js";
 import directChatHistoryHandler from "./socketHandlers/directChatHistoryHandler.js";
 import { setServerSocketInstance } from "./connectedUsers.js";
+import { directMessageHandler } from "./socketHandlers/directMessageHandler.js";
 
 
 const createSocketServer = (server) => {
@@ -27,13 +28,14 @@ const createSocketServer = (server) => {
     io.on('connection', (socket) => {
         console.log(`New socket connection connected: ${socket.id}`);
 
-        // socket.on('message', (msg) => {
-        //     console.log(`Received message: ${msg}`);
-        // });
-
         // when new user is loggedin/active, new connection will be made and s/he will be an online user
         newConnectionHandler(socket, io);
 
+        socket.on("direct-message", (data) => {
+            directMessageHandler(socket, data);
+        })
+
+        // for initial time
         socket.on("get-direct-chat-history", (data) => {
             directChatHistoryHandler(socket, data.receiverId);
         });

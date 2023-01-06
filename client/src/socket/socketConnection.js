@@ -12,9 +12,6 @@ const createConnection = (accessToken) => {
 
 const connectWithSocketServer = (accessToken) => {
     createConnection(accessToken);
-    // const socket = io(process.env.REACT_APP_SOCKET_SERVER_URL, {
-    //     auth: { token: accessToken }
-    // })
 
     socket.on("connect", () => {
         console.log('socket info: ', socket)
@@ -31,4 +28,8 @@ const fetchChatHistory = ({ receiverId }) => {
     socket.emit('get-direct-chat-history', { receiverId })
 }
 
-export { connectWithSocketServer, fetchChatHistory };
+const sendDirectMessage = (data =  {message: "", receiverUserId: ""}) => {
+    socket.emit("direct-message", data)
+}
+
+export { connectWithSocketServer, fetchChatHistory, sendDirectMessage };

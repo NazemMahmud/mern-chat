@@ -8,7 +8,7 @@ const directChatHistoryHandler = async (socket, receiverId) => {
         const senderId = socket.user.id;
 
         // get the conversation between the sender(logged in user) and receiver
-        const conversation = await Conversation.findOne(receiverId, senderId);
+        const conversation = await Conversation.findOne(receiverId, senderId, 'DIRECT');
 
         if (!conversation) {
             return;

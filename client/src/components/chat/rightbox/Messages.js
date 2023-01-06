@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import chatBGWallpaper from "../../../assets/chatBGWallpaper.png";
 import Message from "./Message";
 import ChatInput from "./ChatInput";
+import { sendDirectMessage } from "../../../socket/socketConnection";
 
 const MessageWrapper = styled(Box)({
     backgroundImage: `url(${chatBGWallpaper})`,
@@ -21,28 +22,23 @@ const Container = styled(Box)({
 });
 
 // TODO: like if today only time, || today, yesterday, day bar | Date bar
-const Messages = () => {
-    const [value, setValue] = useState();
+const Messages = ({chatDetails}) => {
+    const [message, setMessage] = useState();
 
     const sendText = async (e) => {
         let code = e.keyCode || e.which || e.key || e.code; // keycode and which is deprecated for modern browser
-        if(!value) return;
-
-        let receiverId = '';
-        let conversationId = ''; // conversation.id will get later
+        if(!message) return;
 
         if(code === 13) {
-            let message = {
-                senderId: '123213', // get logged user id,
-                receiverId,
-                conversationId: conversationId,
-                type: 'text',
-                text: value
-            };
+            sendDirectMessage({
+                message,
+                receiverId: chatDetails?.receiverId
+            });
+
             console.log('message: ', message);
-            setValue('');
+            setMessage('');
         }
-    }
+    };
 
     return (
         <MessageWrapper>
@@ -54,8 +50,8 @@ const Messages = () => {
 
             <ChatInput
                 sendText={sendText}
-                value={value}
-                setValue={setValue}/>
+                message={message}
+                setValue={setMessage}/>
         </MessageWrapper>
     )
 }

@@ -1,6 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
+/**
+ * selectedChatDetails value format
+ * {
+ *  receiverId: ,
+ *  receiverName: ,
+ *  typing: { TODO: later
+ *      userId : // id of the user who's typing;
+ *      typing: boolean; true /  false
+ *  },
+ * }
+ *
+ */
 export const chatSlice = createSlice({
     name: 'chat',
     initialState: {
