@@ -1,6 +1,5 @@
 import { ConversationModel } from "./conversation.schema.js";
 
-
 /**
  * get the conversation between the sender(logged in user) and receiver
  * @returns {Promise<Query<any, any, {}, any>>}
@@ -38,8 +37,24 @@ const findById = async (conversationId) => {
 };
 
 
+/**
+ * create new conversation
+ * @param receiverId
+ * @param senderId
+ * @param message
+ * @returns {Promise<HydratedDocument<any, {}, {}>>}
+ */
+const create = async (receiverId, senderId, message) => {
+    return ConversationModel.create({
+        participants: [senderId, receiverId],
+        messages: [message._id],
+    });
+};
+
+
 export const Conversation = {
     model: ConversationModel,
     findOne,
-    findById
+    findById,
+    create,
 };
