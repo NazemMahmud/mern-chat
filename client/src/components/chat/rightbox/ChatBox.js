@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
-import { useSelector } from "react-redux";
-import { styled } from "@mui/styles";
-import { Box } from "@mui/material";
+import {useSelector} from "react-redux";
+import {styled} from "@mui/styles";
+import {Box} from "@mui/material";
 
+import EmptyChatBox from "./EmptyChatBox";
 import ChatBoxHeader from "./ChatBoxHeader";
 import Messages from "./Messages";
-import { fetchChatHistory } from "../../../socket/socketConnection";
+import {fetchChatHistory} from "../../../socket/socketConnection";
 
 
 const Component = styled(Box) ({
@@ -29,7 +30,7 @@ const ChatBox = () => {
         <Component >
             <ChatBoxHeader chatBuddy={chatBuddy} />
             {/* TODO: need both (chat friend & conversation messages) info here*/}
-            <Messages chatDetails={chatDetails} />
+            { chatDetails?.receiverId ? <Messages chatDetails={chatDetails} /> : <EmptyChatBox /> }
         </Component>
     )
 }

@@ -1,16 +1,13 @@
 import React, {useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import {Box, Button, Dialog, Link, Typography} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {Box, Dialog} from "@mui/material";
+import { useSelector } from "react-redux";
 import {styled} from "@mui/styles";
 
 import MessengerLayout from "../../layout/MessengerLayout";
 import LeftBoxLayout from "../../components/chat/leftbox/LeftBoxLayout";
 import ChatBox from "../../components/chat/rightbox/ChatBox";
-import EmptyChatBox from "../../components/chat/rightbox/EmptyChatBox";
-import { connectWithSocketServer } from "../../socket/socketConnection";
+import {connectWithSocketServer} from "../../socket/socketConnection";
 
 // import NavigationBar from "../../components/NavigationBar";
 
@@ -29,11 +26,6 @@ const MessengerBox = styled(Box)({
     display: 'flex'
 });
 
-
-// const LeftComponent = styled(Box) ({
-//     minWidth: '450px'
-// });
-
 const MessageBox = styled(Box)({
     width: '73%',
     minWidth: '300px',
@@ -43,16 +35,14 @@ const MessageBox = styled(Box)({
 
 const ChatDashboard = () => {
     const navigate = useNavigate();
-    const { accessToken } = useSelector(state => state.auth);
+    const {accessToken} = useSelector(state => state.auth);
 
     // redirect if not logged in
     useEffect(() => {
         const token = accessToken;
         if (!accessToken) {
             navigate("/login");
-        }
-        else {
-            console.log('connect');
+        } else {
             connectWithSocketServer(token);
         }
     }, [accessToken, navigate]);
@@ -61,56 +51,20 @@ const ChatDashboard = () => {
     return (
         <MessengerLayout>
             <Dialog open={true}
-                    PaperProps={{ sx: dialogStyle }}
+                    PaperProps={{sx: dialogStyle}}
                     hideBackdrop={true}
-                    maxWidth={'md'}
-            >
+                    maxWidth={'md'}>
                 <MessengerBox>
-                    {/*LEFT BOX*/}
-                    {/*<LeftComponent>*/}
-                    {/*    chat menu*/}
-                        <LeftBoxLayout></LeftBoxLayout>
-                    {/*</LeftComponent>*/}
+                    {/* chat menu */}
+                    <LeftBoxLayout />
                     {/*RIGHT BOX*/}
                     <MessageBox>
-                        {/*<EmptyChatBox />*/}
-                        <ChatBox></ChatBox>
+                        <ChatBox />
                     </MessageBox>
                 </MessengerBox>
             </Dialog>
         </MessengerLayout>
-
-        // <Grid container spacing={0}
-        //       direction="column"
-        //       alignItems="center"
-        //       justifyContent="center">
-        //     <Grid item xs={12} sm={12} md={12}>
-        //         <Paper elevation={6} square p={2}>
-        //             <div>
-        //                 <Typography component="h5" variant="h5">
-        //                     Dashboard page :D
-        //                 </Typography>
-
-        //                 <Grid container>
-        //                     <Grid item xs={6}>
-        //                         <Button onClick={signOut} variant="contained" color="primary">
-        //                             Log out
-        //                         </Button>
-        //                     </Grid>
-        //                 </Grid>
-        //
-        //                 <Grid container>
-        //                     <Grid item xs={6}>
-        //                         <Link href="#" variant="body2" onClick={signOut}>
-        //                             Logout
-        //                         </Link>
-        //                     </Grid>
-        //                 </Grid>
-        //             </div>
-        //         </Paper>
-        //     </Grid>
-        // </Grid>
     )
-}
+};
 
 export default ChatDashboard;
