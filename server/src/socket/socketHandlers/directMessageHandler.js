@@ -1,5 +1,6 @@
 import { Message } from "../../models/message/message.data.js";
 import { Conversation } from "../../models/conversation/conversation.data.js";
+import { updateChatHistory } from "./notifyConnectedSocketsHandler.js";
 
 /**
  * create new message
@@ -16,20 +17,16 @@ const directMessageHandler = async (socket, data) => {
     const newMessage = await Message.create(senderId, message);
 
     const conversation = await Conversation.findOne(receiverId, senderId);
+    /**
+     * if conversation exists, only updates chat history
+     * else: create new conversation and update chat history of the participants
+     */
     if (conversation) {
-        /**
-         * update chat history with latest conversation data
-         */
         console.log('conversation exists');
     }
     else {
-        /**
-         * create new conversation and
-         * update chat history
-         */
         const newConversation = await Conversation.create(receiverId, senderId, newMessage);
-
-        // update the chat history of the participants
+        updateChatHistory(newConversation._id.toString());
     }
 };
 

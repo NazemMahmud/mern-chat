@@ -29,8 +29,8 @@ const findById = async (conversationId) => {
         path: "messages",
         model: "Message",
         populate: {
-            path: "author",
-            select: "username _id",
+            path: "sender",
+            select: "name _id",
             model: "User"
         }
     });
