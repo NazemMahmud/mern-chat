@@ -29,8 +29,7 @@ const ChatBox = () => {
     return (
         <Component >
             <ChatBoxHeader chatBuddy={chatBuddy} />
-            {/* TODO: need both (chat friend & conversation messages) info here*/}
-            { chatDetails?.receiverId ? <Messages chatDetails={chatDetails} /> : <EmptyChatBox /> }
+            { chatDetails?.receiverId ? <Messages chatDetails={chatDetails}/> : <EmptyChatBox /> }
         </Component>
     )
 }

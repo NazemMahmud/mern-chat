@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
 import { formatDate } from "../../../utility/utils";
+import {useSelector} from "react-redux";
 
 
 const FriendMessage = styled(Box)({
@@ -40,25 +41,26 @@ const Time = styled(Typography)({
 
 
 
-const Message = ({ message = {} }) => {
-    // user account info from localstorage
-    message = { text: "Lorem ipsum is a dummy text", createdAt: "2022-03-16T20:09:26.443Z" };
+const Message = ({ messages }) => {
+    // message = { content: "Lorem ipsum is a dummy text", createdAt: "2022-03-16T20:09:26.443Z" }; // cretedAt missing
+    const senderId = useSelector(state => state.auth.userData.id);
+
     return (
         <>
-            {/*TODO: if storage user id === message senderId, then own message*/}
-            <OwnMessage>
-                {/* TODO: check on message type, normally text, if message.type === 'file', then Image */}
-                {/*<ImageMessage message={message} />*/}
-                <Text> { message.text } </Text>
-                <Time> { formatDate(message.createdAt) } </Time>
-            </OwnMessage>
+            {messages.map((message, index) => (
+                message.sender._id === senderId ?
+                        <OwnMessage key={index}>
+                            {/* TODO: check on message type, normally text, if message.type === 'file', then Image */}
+                            {/*<ImageMessage message={message} />*/}
+                            <Text> {message.content} </Text>
+                            {/*<Time> {formatDate(message.createdAt)} </Time>*/}
+                        </OwnMessage> : <FriendMessage key={index}>
+                            <Text> {message.content} </Text>
+                            {/*<Time> {formatDate(message.createdAt)} </Time>*/}
+                        </FriendMessage>
 
-            {/*TODO: same as above*/}
-
-            <FriendMessage>
-                <Text> { message.text} </Text>
-                <Time> { formatDate(message.createdAt) } </Time>
-            </FriendMessage>
+                ))
+            }
         </>
     )
 }

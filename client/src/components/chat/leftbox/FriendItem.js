@@ -50,10 +50,8 @@ const FriendItem = ({ user }) => {
     const imageUrl = user.picture || avatar;
 
     const setFriend = async () => {
-        // TODO: set the selected friend info
         dispatch(setChatFriend(user));
-        dispatch(setSelectedChatDetails({ receiverId: user.id, receiverName: user.username}));
-        // GET selected friends conversation data [working on]
+        dispatch(setSelectedChatDetails({ receiverId: user.id, receiverName: user.name}));
     }
 
     return (

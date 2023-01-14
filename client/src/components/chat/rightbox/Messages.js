@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useSelector} from "react-redux";
 import { styled } from "@mui/styles";
 import { Box } from "@mui/material";
 import chatBGWallpaper from "../../../assets/chatBGWallpaper.png";
@@ -24,6 +25,7 @@ const Container = styled(Box)({
 // TODO: like if today only time, || today, yesterday, day bar | Date bar
 const Messages = ({chatDetails}) => {
     const [message, setMessage] = useState();
+    const messages = useSelector(state => state.chat.messages);
 
     const sendText = async (e) => {
         let code = e.keyCode || e.which || e.key || e.code; // keycode and which is deprecated for modern browser
@@ -44,7 +46,7 @@ const Messages = ({chatDetails}) => {
         <MessageWrapper>
             <Component>
                 <Container>
-                    <Message message={{}} />
+                    <Message messages={messages} />
                 </Container>
             </Component>
 

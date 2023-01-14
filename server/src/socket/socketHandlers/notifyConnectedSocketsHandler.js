@@ -23,7 +23,6 @@ const updateChatHistory = async (conversationId, toSpecificSocketId= null) => {
     const io = getServerSocketInstance();
 
     if (toSpecificSocketId) {
-        // TODO: initial chat history update
         return io.to(toSpecificSocketId).emit("get-direct-chat-history", {
             messages: conversation.messages,
             participants: conversation.participants

@@ -24,7 +24,7 @@ const connectWithSocketServer = (accessToken) => {
     });
 
     /**
-     * get messages after typing & send something
+     * get messages: 1. initial time, 2. after typing & send something
      * it is only for direct message, not group
      * if sender and receiver id both in the participants list, only then update the message state
      */
