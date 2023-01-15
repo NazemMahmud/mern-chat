@@ -24,7 +24,7 @@ export const chatSlice = createSlice({
             state.selectedChatDetails = action.payload;
         },
         setMessages: (state, action) => {
-            state.messages = action.payload instanceof Object ? [action.payload] : action.payload;
+            state.messages = Array.isArray(action.payload)? action.payload : [action.payload];
         },
     }
 });

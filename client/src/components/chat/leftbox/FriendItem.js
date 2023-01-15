@@ -5,7 +5,7 @@ import { Box, Typography  } from "@mui/material";
 
 import avatar from "../../../assets/profile-avatar.png";
 import { setChatFriend } from "../../../redux/friends";
-import { setSelectedChatDetails } from "../../../redux/chat";
+import {setMessages, setSelectedChatDetails} from "../../../redux/chat";
 
 
 
@@ -49,13 +49,14 @@ const FriendItem = ({ user }) => {
     // TODO: picture will be added later
     const imageUrl = user.picture || avatar;
 
-    const setFriend = async () => {
+    const setInitialChatDetails = async () => {
         dispatch(setChatFriend(user));
         dispatch(setSelectedChatDetails({ receiverId: user.id, receiverName: user.name}));
+        dispatch(setMessages([]));
     }
 
     return (
-        <Component onClick={() => setFriend()}>
+        <Component onClick={() => setInitialChatDetails()}>
             <Box>
                 <Image src={imageUrl} alt="user profile picture" />
             </Box>
