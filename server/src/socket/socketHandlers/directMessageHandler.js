@@ -15,19 +15,22 @@ const directMessageHandler = async (socket, data) => {
     const senderId = socket.user.id;
 
     const newMessage = await Message.create(senderId, message);
+    let conversation = await Conversation.findOne(receiverId, senderId);
 
-    const conversation = await Conversation.findOne(receiverId, senderId);
     /**
-     * if conversation exists, only updates chat history
+     * if conversation exists, add new message to that conversation & updates chat history
      * else: create new conversation and update chat history of the participants
      */
     if (conversation) {
-        console.log('conversation exists');
+        conversation.messages = [...conversation.messages, newMessage._id];
+        await conversation.save();
     }
     else {
-        const newConversation = await Conversation.create(receiverId, senderId, newMessage);
-        updateChatHistory(newConversation._id.toString());
+        conversation = await Conversation.create(receiverId, senderId, newMessage);
     }
+
+    // update the chat history (track the message ids) of the participants
+    updateChatHistory(conversation._id.toString());
 };
 
 export { directMessageHandler };

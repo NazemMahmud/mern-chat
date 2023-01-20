@@ -31,3 +31,6 @@ export const formatDate = (date) => {
     const minutes = new Date(date).getMinutes();
     return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
 }
+
+
+// TODO: date for sameday, previous day, normal day, local datetime string (need both in message box & sidebar)

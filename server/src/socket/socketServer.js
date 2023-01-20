@@ -5,8 +5,8 @@ import { checkAuth } from "../middlewares/socket.auth.middleware.js";
 import newConnectionHandler from "./socketHandlers/newConnectionHandler.js";
 import disconnectHandler from "./socketHandlers/disconnectHandler.js";
 import directChatHistoryHandler from "./socketHandlers/directChatHistoryHandler.js";
-import { setServerSocketInstance } from "./connectedUsers.js";
-import { directMessageHandler } from "./socketHandlers/directMessageHandler.js";
+import {setServerSocketInstance} from "./connectedUsers.js";
+import {directMessageHandler} from "./socketHandlers/directMessageHandler.js";
 
 
 const createSocketServer = (server) => {
@@ -31,9 +31,9 @@ const createSocketServer = (server) => {
         // when new user is loggedin/active, new connection will be made and s/he will be an online user
         newConnectionHandler(socket, io);
 
-        socket.on("direct-message", (data) => {
+        socket.on("new-direct-message", (data) => {
             directMessageHandler(socket, data);
-        })
+        });
 
         // for initial time
         socket.on("get-direct-chat-history", (data) => {
