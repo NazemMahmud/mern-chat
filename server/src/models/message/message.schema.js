@@ -1,19 +1,21 @@
 import mongoose from "mongoose";
 
 export const MessageSchema = new mongoose.Schema({
-    sender: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
+        sender: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        content: {
+            type: String,
+            required: [true, "can't be empty"],
+        },
+        type: {
+            type: String,
+        }
     },
-    content: {
-        type: String,
-        required: [true, "can't be empty"],
-    },
-    type: {
-        type: String,
-    }
-});
+    {timestamps: true}
+);
 
 MessageSchema.set('toJSON', { virtuals: true });
 

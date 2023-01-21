@@ -13,6 +13,7 @@ const FriendMessage = styled(Box)({
     display: "flex",
     borderRadius: "10px",
     wordBreak: "break-word",
+    marginBottom: "10px"
 });
 
 const OwnMessage = styled(Box)({
@@ -24,6 +25,7 @@ const OwnMessage = styled(Box)({
     display: "flex",
     borderRadius: "10px",
     wordBreak: "break-word",
+    marginBottom: "10px"
 });
 
 const Text = styled(Typography)({

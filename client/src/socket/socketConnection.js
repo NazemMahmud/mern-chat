@@ -44,11 +44,11 @@ const connectWithSocketServer = (accessToken) => {
 };
 
 const fetchChatHistory = ({ receiverId }) => {
-    socket.emit('get-direct-chat-history', { receiverId })
-}
+    socket.emit('get-direct-chat-history', { receiverId });
+};
 
 const sendDirectMessage = (data =  {message: "", receiverUserId: ""}) => {
-    socket.emit("direct-message", data)
-}
+    socket.emit("new-direct-message", data);
+};
 
 export { connectWithSocketServer, fetchChatHistory, sendDirectMessage };

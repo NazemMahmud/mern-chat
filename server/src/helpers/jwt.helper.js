@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "../config/env.config.js";
+import {JWT_EXPIRES_IN, JWT_SECRET_KEY} from "../config/env.config.js";
 
 /**
  * create new jwt token
@@ -12,7 +12,7 @@ export const generateToken = user => {
             }
         },
         JWT_SECRET_KEY, {
-            expiresIn: 86400
+            expiresIn: JWT_EXPIRES_IN || 2592000 // 1 month
         });
 };
 
