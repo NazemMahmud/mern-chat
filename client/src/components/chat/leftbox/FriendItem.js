@@ -8,7 +8,6 @@ import { setChatFriend } from "../../../redux/friends";
 import {setMessages, setSelectedChatDetails} from "../../../redux/chat";
 
 
-
 const Component = styled(Box)({
     minWidth: "450px",
     height: "45px",
@@ -51,7 +50,7 @@ const FriendItem = ({ user }) => {
 
     const setInitialChatDetails = async () => {
         dispatch(setChatFriend(user));
-        dispatch(setSelectedChatDetails({ receiverId: user.id, receiverName: user.name}));
+        dispatch(setSelectedChatDetails({ receiverId: user._id, receiverName: user.name}));
         dispatch(setMessages([]));
     }
 
@@ -63,11 +62,12 @@ const FriendItem = ({ user }) => {
             <Box style={{width: '100%'}}>
                 <Container>
                     <Typography> { user.name } </Typography>
+                    {/* // TODO: it has 3 format,  dd/mm/yyyy, Day, time: h:m AM/PM */}
                     <Timestamp> last msg time data </Timestamp>
 
                 </Container>
                 <Box>
-                    <Text> Some text </Text>
+                    {user.conversation && <Text> {user.conversation.content} </Text> }
                 </Box>
             </Box>
         </Component>
