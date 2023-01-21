@@ -20,17 +20,14 @@ export const checkDisableButton = formInput => {
     return false
 }
 
-
-export const getFriend = () => {
-    // TODO
-}
-
-// TODO: needs to update, AM, PM better
-export const formatDate = (date) => {
-    const hours = new Date(date).getHours();
-    const minutes = new Date(date).getMinutes();
-    return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+/**
+ * Returns in hour:min AM format
+ * @param date
+ * @returns {string}
+ */
+export const formatHourAndMinute = date => {
+    return new Date(date).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric' });
 }
 
 
-// TODO: date for sameday, previous day, normal day, local datetime string (need both in message box & sidebar)
+// TODO: date for sameday, previous day, normal day, local datetime string (need in sidebar)
