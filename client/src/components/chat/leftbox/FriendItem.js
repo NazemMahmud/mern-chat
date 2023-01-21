@@ -6,7 +6,7 @@ import { Box, Typography  } from "@mui/material";
 import avatar from "../../../assets/profile-avatar.png";
 import { setChatFriend } from "../../../redux/friends";
 import {setMessages, setSelectedChatDetails} from "../../../redux/chat";
-import {formatDateTime} from "../../../utility/utils";
+import {formatDateTime, truncateString} from "../../../utility/utils";
 
 
 const Component = styled(Box)({
@@ -65,8 +65,7 @@ const FriendItem = ({ user }) => {
                     {user.conversation && <Timestamp> { formatDateTime(user.conversation.createdAt)} </Timestamp> }
                 </Container>
                 <Box>
-                    {/* // TODO: content length (may be 25) fix, so that UI don't break*/}
-                    {user.conversation && <Text> {user.conversation.content} </Text> }
+                    {user.conversation && <Text> { truncateString(user.conversation.content, 40)} </Text> }
                 </Box>
             </Box>
         </Component>
