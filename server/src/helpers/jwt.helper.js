@@ -12,7 +12,7 @@ export const generateToken = user => {
             }
         },
         JWT_SECRET_KEY, {
-            expiresIn: JWT_EXPIRES_IN || 2592000 // 1 month
+            expiresIn: JWT_EXPIRES_IN  // 1 month
         });
 };
 

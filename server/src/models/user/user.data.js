@@ -18,9 +18,17 @@ const getAll = async () => {
     return UserModel.find({});
 }
 
+const getUsersNotLoggedIn = async loggedInUserId => {
+    return UserModel.find({
+        _id: {
+            $ne: loggedInUserId
+        }} ).select("_id name").lean();
+}
+
 export const User = {
     model: UserModel,
     getOne,
     createNew,
-    getAll
+    getAll,
+    getUsersNotLoggedIn
 }

@@ -7,4 +7,4 @@ const Model = User;
  */
 export const getAll = async () => {
     return Model.getAll();
-}
+};
