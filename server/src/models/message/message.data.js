@@ -13,10 +13,17 @@ const create = async (senderId, message) => {
         content: message,
         type: "DIRECT",
     });
-}
+};
 
+
+const findLastConversationMessage = async (messages) => {
+    return MessageModel.findOne({
+        _id: { $in: messages } }, {content: 1, createdAt: 1, _id: 0})
+        .sort({ updatedAt: -1 }).lean();
+};
 
 export const Message = {
     model: MessageModel,
     create,
+    findLastConversationMessage,
 };

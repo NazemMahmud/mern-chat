@@ -6,7 +6,7 @@ import { Box, Divider } from "@mui/material";
 
 //components
 import FriendItem from './FriendItem';
-import { getUsers } from "../../../services/users.service";
+import {getUsersWithLastConversationMessage} from "../../../services/users.service";
 import { setFriendsList } from "../../../redux/friends";
 import { getUserData } from "../../../utility/utils";
 
@@ -29,14 +29,21 @@ const FriendsList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            let response = await getUsers();
-            const data = response.data.data;
-            dispatch(setFriendsList(data));
-            setUsers(data);
+            let response = await getUsersWithLastConversationMessage();
+            setUsersList(response.data.data);
+            setUsers(response.data.data);
         }
 
         fetchData();
     }, []);
+
+    const setUsersList = (data) => {
+        const friends = [];
+        data.forEach(item => {
+            friends.push({ _id: item._id, id: item._id, name: item.name})
+        });
+        dispatch(setFriendsList(users));
+    }
 
     return (
         <Component>
