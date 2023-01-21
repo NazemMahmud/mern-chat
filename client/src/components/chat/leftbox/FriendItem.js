@@ -6,6 +6,7 @@ import { Box, Typography  } from "@mui/material";
 import avatar from "../../../assets/profile-avatar.png";
 import { setChatFriend } from "../../../redux/friends";
 import {setMessages, setSelectedChatDetails} from "../../../redux/chat";
+import {formatDateTime} from "../../../utility/utils";
 
 
 const Component = styled(Box)({
@@ -29,7 +30,7 @@ const Container = styled(Box) ({
 });
 
 const Timestamp = styled(Typography) ({
-    fontSize: "12px",
+    fontSize: "12px !important",
     marginLeft: "auto !important",
     color: "#00000099",
     marginRight: "20px !important"
@@ -43,8 +44,6 @@ const Text = styled(Typography) ({
 
 const FriendItem = ({ user }) => {
     const dispatch = useDispatch();
-
-    // console.log('user: ', user);
     // TODO: picture will be added later
     const imageUrl = user.picture || avatar;
 
@@ -62,11 +61,11 @@ const FriendItem = ({ user }) => {
             <Box style={{width: '100%'}}>
                 <Container>
                     <Typography> { user.name } </Typography>
-                    {/* // TODO: it has 3 format,  dd/mm/yyyy, Day, time: h:m AM/PM */}
-                    <Timestamp> last msg time data </Timestamp>
-
+                    {/* 3 format,  dd/mm/yyyy, Day, time: h:m AM/PM */}
+                    {user.conversation && <Timestamp> { formatDateTime(user.conversation.createdAt)} </Timestamp> }
                 </Container>
                 <Box>
+                    {/* // TODO: content length (may be 25) fix, so that UI don't break*/}
                     {user.conversation && <Text> {user.conversation.content} </Text> }
                 </Box>
             </Box>

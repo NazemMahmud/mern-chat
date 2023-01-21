@@ -46,8 +46,7 @@ const EmptyChatBox = () => {
             <Container>
                 <Image src={emptyChatImage} alt="empty" />
                 <Title>WhatsApp Clone Web</Title>
-                <SubTitle>Now send and receive messages without keeping your phone online.</SubTitle>
-                <SubTitle>Use WhatsApp on up to 4 linked devices and 1 phone at the same time. </SubTitle>
+                <SubTitle>This is an empty chatbox. To start or view messages, please select one friend/user from the sidebar</SubTitle>
                 <StyledDivider />
             </Container>
         </Component>

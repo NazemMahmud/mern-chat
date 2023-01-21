@@ -1,6 +1,6 @@
 import {authInstance as axios} from "../utility/axios";
 
-// get active users
-export const getUsers = async () => {
-    return axios.get('/users');
+
+export const getUsersWithLastConversationMessage = async () => {
+    return axios.get('/users/conversation-message');
 }
