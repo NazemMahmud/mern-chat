@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { styled } from "@mui/styles";
 import { Box, Typography  } from "@mui/material";
 
@@ -42,14 +42,26 @@ const Text = styled(Typography) ({
     fontSize: "14px"
 });
 
+const Typing = styled(Typography) ({
+    marginLeft: "auto !important",
+    fontSize: "12px !important",
+    color: "#3ba55d",
+    marginRight: "5px !important",
+    marginTop: "5px !important"
+});
+
 const FriendItem = ({ user }) => {
     const dispatch = useDispatch();
     // TODO: picture will be added later
     const imageUrl = user.picture || avatar;
+    const chatDetails = useSelector(state => state.chat.selectedChatDetails);
+
+    // if this is the user typing and this user is not the one you are currently chatting with
+    const isTyping = chatDetails?.typing && chatDetails?.receiverId == user._id;
 
     const setInitialChatDetails = async () => {
         dispatch(setChatFriend(user));
-        dispatch(setSelectedChatDetails({ receiverId: user._id, receiverName: user.name}));
+        dispatch(setSelectedChatDetails({ receiverId: user._id, receiverName: user.name, typing: false}));
         dispatch(setMessages([]));
     }
 
@@ -64,8 +76,13 @@ const FriendItem = ({ user }) => {
                     {/* 3 format,  dd/mm/yyyy, Day, time: h:m AM/PM */}
                     {user.conversation && <Timestamp> { formatDateTime(user.conversation.createdAt)} </Timestamp> }
                 </Container>
-                <Box>
+                <Box style={{ display: "flex" }}>
                     {user.conversation && <Text> { truncateString(user.conversation.content, 40)} </Text> }
+                    {isTyping && (
+                        <Typing variant="subtitle1" align="left">
+                            typing...
+                        </Typing>
+                    )}
                 </Box>
             </Box>
         </Component>

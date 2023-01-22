@@ -28,7 +28,7 @@ const ChatBox = () => {
     return (
         <Component >
             <ChatBoxHeader chatBuddy={chatBuddy} />
-            { chatDetails?.receiverId ? <Messages chatDetails={chatDetails}/> : <EmptyChatBox /> }
+            { chatDetails?.receiverId ? <Messages chatDetails={chatDetails} chatBuddy={chatBuddy}/> : <EmptyChatBox /> }
         </Component>
     )
 }
