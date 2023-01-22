@@ -26,9 +26,12 @@ export const chatSlice = createSlice({
         setMessages: (state, action) => {
             state.messages = Array.isArray(action.payload)? action.payload : [action.payload];
         },
+        setTyping: (state, action) => {
+            state.selectedChatDetails = action.payload;
+        },
     }
 });
 
-export const { setSelectedChatDetails, setMessages } = chatSlice.actions
+export const { setSelectedChatDetails, setMessages, setTyping } = chatSlice.actions
 
 export default chatSlice.reducer;

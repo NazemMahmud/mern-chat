@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { styled } from "@mui/styles";
-import { Box, InputBase } from "@mui/material";
-import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
-
+import React from "react";
+import {styled} from "@mui/styles";
+import {Box, InputBase} from "@mui/material";
+import {EmojiEmotions, AttachFile, Mic} from '@mui/icons-material';
+import {notifyTyping} from "../../../socket/socketConnection";
 
 const Component = styled(Box)({
     height: "55px",
     background: "#ededed",
     display: "flex",
-    alignItems : "center",
+    alignItems: "center",
     width: "100%",
     padding: "0 15px",
     "&  > *": {
@@ -37,35 +37,45 @@ const ClipIcon = styled(AttachFile)({
 });
 
 
-const ChatInput = ({ sendText, message, setValue }) => {
+const ChatInput = ({sendText, message, chatDetails, setValue}) => {
 
-        const onFileChange = (e) => {
-            // TODO: later
-        }
+    const onFileChange = (e) => {
+        // TODO: later
+    }
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+        notifyTyping(chatDetails?.receiverId, event.target.value.length > 0)
+    };
+
+    const handleBlur = (event) => {
+        notifyTyping(chatDetails?.receiverId, false)
+    }
 
     return (
         <Component>
-            <EmojiEmotions />
+            <EmojiEmotions/>
             <label htmlFor="fileInput">
-                <ClipIcon />
+                <ClipIcon/>
             </label>
             <input
                 type='file'
                 id="fileInput"
-                style={{ display: 'none' }}
+                style={{display: 'none'}}
                 onChange={(e) => onFileChange(e)}
             />
 
             <Search>
                 <InputField
                     placeholder="Type your message"
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={(e) => setValue(e.target.value)}
+                    inputProps={{'aria-label': 'search'}}
                     onKeyPress={(e) => sendText(e)}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={message}
                 />
             </Search>
-            <Mic />
+            <Mic/>
         </Component>
     )
 }
