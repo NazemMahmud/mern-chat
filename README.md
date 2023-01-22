@@ -1,7 +1,7 @@
 ## About
 This is a simple chat (for now it is only 1-to-1 chat) based on MERN stack, with s simple JWT token based authentication system.
 
-For design I try to copy the whatsapp web version. It is not fully responsible. I only build it for the web version. \
+For design, I try to copy the UI of whatsapp web version. It is not fully responsive. I only build it for the web version. \
 And, as the main focus of this project was building a one-to-one chat, some other things are ignored for now.
 
 ## Pre-requirements
