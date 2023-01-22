@@ -22,7 +22,7 @@ const Container = styled(Box)({
     padding: "4px 10px"
 });
 
-// TODO: like if today only time, || today, yesterday, day bar | Date bar
+
 const Messages = ({chatDetails}) => {
     const [message, setMessage] = useState();
     const messages = useSelector(state => state.chat.messages);
@@ -36,8 +36,6 @@ const Messages = ({chatDetails}) => {
                 message,
                 receiverId: chatDetails?.receiverId
             });
-
-            console.log('message: ', message);
             setMessage('');
         }
     };
@@ -53,6 +51,7 @@ const Messages = ({chatDetails}) => {
             <ChatInput
                 sendText={sendText}
                 message={message}
+                chatDetails={chatDetails}
                 setValue={setMessage}/>
         </MessageWrapper>
     )

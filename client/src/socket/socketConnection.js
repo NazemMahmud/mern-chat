@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import { store } from "../redux/store";
 import { setOnlineUsers } from "../redux/friends";
-import { setMessages } from "../redux/chat";
+import {setMessages, setTyping} from "../redux/chat";
 
 let socket ;
 
@@ -41,6 +41,11 @@ const connectWithSocketServer = (accessToken) => {
             store.dispatch(setMessages(messages));
         }
     });
+
+    socket.on("notify-typing", (data) => {
+        const selectedChatDetails = store.getState().chat.selectedChatDetails;
+        store.dispatch(setTyping({...selectedChatDetails, typing: data.typing, receiverId: data.senderId}));
+    });
 };
 
 const fetchChatHistory = ({ receiverId }) => {
@@ -51,4 +56,8 @@ const sendDirectMessage = (data =  {message: "", receiverUserId: ""}) => {
     socket.emit("new-direct-message", data);
 };
 
-export { connectWithSocketServer, fetchChatHistory, sendDirectMessage };
+const notifyTyping = (receiverId, typing) => {
+    socket.emit("notify-typing", { receiverId, typing });
+};
+
+export { connectWithSocketServer, fetchChatHistory, sendDirectMessage, notifyTyping };

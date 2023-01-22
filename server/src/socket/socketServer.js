@@ -7,6 +7,7 @@ import disconnectHandler from "./socketHandlers/disconnectHandler.js";
 import directChatHistoryHandler from "./socketHandlers/directChatHistoryHandler.js";
 import {setServerSocketInstance} from "./connectedUsers.js";
 import {directMessageHandler} from "./socketHandlers/directMessageHandler.js";
+import notifyTypingHandler from "./socketHandlers/notifyTypingHandler.js";
 
 
 const createSocketServer = (server) => {
@@ -38,6 +39,10 @@ const createSocketServer = (server) => {
         // for initial time
         socket.on("get-direct-chat-history", (data) => {
             directChatHistoryHandler(socket, data.receiverId);
+        });
+
+        socket.on("notify-typing", (data) => {
+            notifyTypingHandler(socket, io, data);
         });
 
         socket.on("disconnect", () => {
