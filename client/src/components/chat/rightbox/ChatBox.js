@@ -21,7 +21,6 @@ const ChatBox = () => {
     useEffect(() => {
         // get conversation with chatBuddy: at least one friend is selected
         if (chatDetails) {
-            console.log('fetching chat history with: ', chatDetails);
             fetchChatHistory({ receiverId: chatDetails.receiverId })
         }
     }, [chatDetails]);

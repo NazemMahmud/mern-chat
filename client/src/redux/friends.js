@@ -18,7 +18,6 @@ export const userSlice = createSlice({
             state.selectedFriend = action.payload;
         },
         setOnlineUsers: (state, action) => {
-            console.log('online-users: ', action.payload);
             state.onlineUsers = action.payload
         }
     }

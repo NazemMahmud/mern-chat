@@ -11,7 +11,6 @@ const keyvCache = new Keyv();
 const calculateCacheTTL = tokenExpiresIn => {
     const now = new Date();
     const expire = new Date(tokenExpiresIn);
-    console.log('cache: ', now.getTime() - expire.getTime());
     return now.getTime() - expire.getTime();
 };
 

@@ -38,7 +38,7 @@ export const handleValidation = validate => {
         message.forEach(msg => {
             messages.push(msg.replace(/["]+/g, '')) // trim quote marks
         })
-        // console.log('messages array: ', messages);
+
         const error = new ValidationErrors(messages);
         return errorResponse(res, error)
         // Validate error sample

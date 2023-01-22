@@ -36,8 +36,6 @@ const Messages = ({chatDetails}) => {
                 message,
                 receiverId: chatDetails?.receiverId
             });
-
-            console.log('message: ', message);
             setMessage('');
         }
     };

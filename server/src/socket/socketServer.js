@@ -41,7 +41,6 @@ const createSocketServer = (server) => {
         });
 
         socket.on("disconnect", () => {
-            console.log(`Connected socket disconnected: ${socket.id}`);
             disconnectHandler(socket, io);
         });
     });
