@@ -30,7 +30,6 @@ const connectWithSocketServer = (accessToken) => {
      */
     socket.on("get-direct-chat-history", (data) => {
         const { messages, participants } = data;
-        console.log('data: ', data);
         const receiverId = store.getState().chat.selectedChatDetails?.receiverId;
         const senderId = (store.getState().auth.userData).id;
 
