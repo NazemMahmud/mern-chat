@@ -35,6 +35,7 @@ const registration = async (req, res) => {
         const response = await createUser(req.body);
         successResponse(res, response, 201)
     } catch (err) {
+        console.log("Error: ", err);
         handleError(err, req, res);
     }
 }

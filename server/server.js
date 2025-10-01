@@ -7,7 +7,7 @@ import { keyvCache } from "./src/utilities/cache.js";
 import MongoDBConnect from "./src/config/mongodb.connect.js"; // db config
 import Router from "./src/routes/index.js";
 import { createSocketServer } from "./src/socket/socketServer.js";
-import {CLIENT_URL_DEV, SOCKET_PORT } from "./src/config/env.config.js";
+import {CLIENT_URL_DEV, PORT, SOCKET_PORT} from "./src/config/env.config.js";
 
 const app = express();
 
@@ -28,7 +28,7 @@ const server = http.createServer(app);
 createSocketServer(server);
 
 server.listen(SOCKET_PORT, () => {
-    console.log(`SERVER STARTED ON ${SOCKET_PORT}.....!!`);
+    console.log(`SERVER STARTED ON ${SOCKET_PORT} (API + Socket).....!`);
 });
 
 export { app, keyvCache };
